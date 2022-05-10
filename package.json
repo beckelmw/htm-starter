@@ -1,0 +1,27 @@
+{
+  "name": "htm-starter",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:*\" \"npm:site:*\"",
+    "dev:site": "wrangler pages dev ./public --kv SITE",
+    "dev:tailwind": "tailwindcss -c ./tailwind.config.cjs -i ./src/css/site.css -o ./public/site.css --watch",
+    "build": "concurrently \"npm:build:*\" \"npm:site:*\"",
+    "build:tailwind": "tailwindcss -c ./tailwind.config.cjs -i ./src/css/site.css -o ./public/site.css --minify",
+    "site:error-pages": "node ./build/error-pages.js",
+    "site:favicon": "node ./build/favicon.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "htm": "^3.1.1",
+    "itty-router": "^2.6.1",
+    "itty-router-extras": "^0.4.2",
+    "preact": "^10.7.2",
+    "preact-render-to-string": "^5.2.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "wrangler": "^0.0.0-f584ae6"
+  }
+}

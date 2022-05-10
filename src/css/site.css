@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  @apply antialiased;
+}
+
+h1 {
+  @apply font-medium leading-tight text-5xl mt-0 mb-2;
+}
+
+h2 {
+  @apply font-medium leading-tight text-4xl mt-0 mb-2;
+}
+
+h3 {
+  @apply font-medium leading-tight text-3xl mt-0 mb-2;
+}
+
+a {
+  @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr min(60ch, calc(100% - 64px)) 1fr;
+  grid-column-gap: 32px;
+}
+
+.wrapper > * {
+  grid-column: 2;
+}
+
+.site-header {
+  grid-column: 1 / -1;
+}
+
+.full-bleed {
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+nav a {
+  @apply font-medium text-lg no-underline text-white hover:text-white visited:text-white;
+}

@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "tailwindcss"
+    ],
+    "emmet.includeLanguages": {
+        "javascript": "html"
+    }
+}
