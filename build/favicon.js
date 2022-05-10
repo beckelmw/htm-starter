@@ -1,9 +1,11 @@
-import { writeFile, readFile } from "fs/promises";
+import { writeFile, readFile, mkdir } from "fs/promises";
 import { render as renderToString } from "preact-render-to-string";
 import { Favicon } from "../src/components/favicon.js";
 
 const pkg = await readFile("./package.json", "utf-8");
 const pkgJson = JSON.parse(pkg);
+
+await mkdir("./public", { recursive: true });
 
 await writeFile(
   "./public/favicon.svg",
