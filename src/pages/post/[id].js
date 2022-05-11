@@ -1,5 +1,5 @@
-import html from "#/lib/html";
-import { Header, Footer, Main } from "#/components";
+import html from "../../lib/html.js";
+import { Header, Footer, Main } from "../../components/index.js";
 
 export async function getServerSideData({ params }) {
   const [, id] = params.path;
@@ -11,10 +11,10 @@ export async function getServerSideData({ params }) {
   return { post: data };
 }
 
-export default function About({ props }) {
+export default function Post({ props }) {
   const { post } = props;
 
-  return html`
+  const result = html`
     <div class="wrapper">
       <${Header} />
       <${Main}>
@@ -24,4 +24,5 @@ export default function About({ props }) {
       <${Footer} />
     </div>
   `;
+  return result;
 }

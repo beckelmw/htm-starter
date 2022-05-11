@@ -1,6 +1,6 @@
-import html from "#/lib/html.js";
-import { Header, Footer, Main } from "#/components";
-import { PostList } from "#/components/PostList";
+import html from "../lib/html.js";
+import { Header, Footer, Main } from "../components/index.js";
+import { PostList } from "../components/PostList.js";
 
 export function headers() {
   return {

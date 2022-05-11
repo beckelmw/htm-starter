@@ -3,7 +3,7 @@ import { h } from "preact";
 import { render as renderToString } from "preact-render-to-string";
 import { SECURITY_HEADERS } from "./constants.js";
 import * as PageNotFound from "../pages/404.js";
-import { HtmlPage } from "../pages/document.js";
+import { HtmlPage } from "../pages/_document.js";
 
 export default htm.bind(h);
 

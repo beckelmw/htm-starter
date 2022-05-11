@@ -1,5 +1,5 @@
-import html from "#/lib/html";
-import { Header, Footer, Main } from "#/components";
+import html from "../lib/html.js";
+import { Header, Footer, Main } from "../components/index.js";
 
 export async function getServerSideData({ env }) {
   await env.SITE.put("test.json", JSON.stringify({ test: "1" }));
