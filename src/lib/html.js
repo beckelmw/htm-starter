@@ -11,8 +11,8 @@ const isFunction = (fn) => {
   return typeof fn === "function";
 };
 
-export function createRenderer({ request, env, params }) {
-  return async (Layout, Page) => {
+export function createRenderer({ request, env }) {
+  return async (Layout, Page, params) => {
     let data = {};
     let headers = {
       "content-type": "text/html",

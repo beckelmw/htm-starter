@@ -1,6 +1,7 @@
-import { writeFile } from "fs/promises";
+import { writeFile, readFile } from "fs/promises";
 import { globby } from "globby";
 import { resolve } from "path";
+import hasha from "hasha";
 
 const files = await globby(["../src/pages/**/[a-z[]*.js"], {
   cwd: resolve(process.cwd(), "build"),
@@ -12,7 +13,13 @@ for (const file of files) {
     continue;
   }
   const code = await import(file);
-  ROUTES[file] = { name: code.default.name, file };
+  const contents = await readFile(
+    resolve(process.cwd(), "build", file),
+    "utf-8"
+  );
+  const hash = await hasha.async(contents, { algorithm: "md5" });
+  const name = `${code.default.name}_${hash}`;
+  ROUTES[file] = { name, file };
 }
 
 const routes = Object.keys(ROUTES).map((route) => {

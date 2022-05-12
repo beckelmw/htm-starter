@@ -1,4 +1,4 @@
-import { ThrowableRouter } from "itty-router-extras";
+import { ThrowableRouter, withParams } from "itty-router-extras";
 import { createRenderer } from "#/lib/html";
 import { HtmlPage } from "#/pages/_document";
 import robots from "#/pages/robots";
@@ -12,16 +12,16 @@ export default function Router(context) {
   const router = ThrowableRouter();
 
   for (const route of routes) {
-    router.get(route.path, () => render(HtmlPage, route.code));
+    router.get(route.path, withParams, ({ params }) =>
+      render(HtmlPage, route.code, params)
+    );
   }
 
-  router
-    .all("/robots.txt", robots)
-    .get("*", () => {
-      // Since we are using cloudflare pages need to go here
-      // in order to get assets like css
-      return env.ASSETS.fetch(request);
-    });
+  router.all("/robots.txt", robots).get("*", () => {
+    // Since we are using cloudflare pages need to go here
+    // in order to get assets like css
+    return env.ASSETS.fetch(request);
+  });
 
   return router;
 }

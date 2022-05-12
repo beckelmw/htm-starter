@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
+        "esbuild",
+        "hasha",
+        "miniflare",
+        "prebuild",
         "tailwindcss"
     ],
     "emmet.includeLanguages": {

@@ -2,7 +2,7 @@ import html from "../../lib/html.js";
 import { Header, Footer, Main } from "../../components/index.js";
 
 export async function getServerSideData({ params }) {
-  const [, id] = params.path;
+  const { id } = params;
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
   if (!res.ok) {
     return { errorCode: res.status };
