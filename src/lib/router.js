@@ -1,5 +1,5 @@
 import { ThrowableRouter, withParams } from "itty-router-extras";
-import { createRenderer } from "#lib/html.js";
+import { createRenderer } from "#lib/renderer.js";
 import { HtmlPage } from "#pages/_document.js";
 import robots from "#pages/robots.js";
 
