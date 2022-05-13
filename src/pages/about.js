@@ -1,5 +1,5 @@
-import html from "../lib/html.js";
-import { Header, Footer, Main } from "../components/index.js";
+import html from "#lib/html.js";
+import { Header, Footer, Main } from "#components/index.js";
 
 export function headers() {
   return {

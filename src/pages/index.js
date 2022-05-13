@@ -1,6 +1,6 @@
-import html from "../lib/html.js";
-import { Header, Footer, Main } from "../components/index.js";
-import { PostList } from "../components/PostList.js";
+import html from "#lib/html.js";
+import { Header, Footer, Main } from "#components/index.js";
+import { PostList } from "#components/PostList.js";
 
 export function headers() {
   return {
@@ -12,7 +12,7 @@ export function head() {
   return html` <meta name="author" content="Bill Beckelman" /> `;
 }
 
-export async function getServerSideData() {
+export async function api() {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
   const data = await res.json();
   return { posts: data.slice(0, 10) };

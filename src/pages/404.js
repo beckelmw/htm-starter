@@ -1,5 +1,5 @@
-import html from "../lib/html.js";
-import { Header, Footer } from "../components/index.js";
+import html from "#lib/html.js";
+import { Header, Footer } from "#components/index.js";
 
 export default function PageNotFound() {
   return html`

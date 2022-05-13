@@ -1,7 +1,7 @@
-import html from "../lib/html.js";
-import { Header, Footer, Main } from "../components/index.js";
+import html from "#lib/html.js";
+import { Header, Footer, Main } from "#components/index.js";
 
-export async function getServerSideData({ env }) {
+export async function api({ env }) {
   await env.SITE.put("test.json", JSON.stringify({ test: "1" }));
   const site = await env.SITE.get("test.json", "json");
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);

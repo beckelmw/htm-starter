@@ -1,4 +1,4 @@
-import getRouter from "#/lib/router";
+import getRouter from "#lib/router.js";
 
 export default {
   async fetch(request, env) {

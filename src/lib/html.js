@@ -2,8 +2,8 @@ import htm from "htm";
 import { h } from "preact";
 import { render as renderToString } from "preact-render-to-string";
 import { SECURITY_HEADERS } from "./constants.js";
-import * as PageNotFound from "../pages/404.js";
-import { HtmlPage } from "../pages/_document.js";
+import * as PageNotFound from "#pages/404.js";
+import { HtmlPage } from "#pages/_document.js";
 
 export default htm.bind(h);
 
@@ -20,8 +20,8 @@ export function createRenderer({ request, env }) {
     };
     let head = "";
 
-    if (isFunction(Page.getServerSideData)) {
-      data = await Page.getServerSideData({ request, env, params });
+    if (isFunction(Page.api)) {
+      data = await Page.api({ request, env, params });
       if (data.errorCode) {
         const html = renderToString(PageNotFound.default());
         return new Response(HtmlPage({ content: html }), {

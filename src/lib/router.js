@@ -1,7 +1,7 @@
 import { ThrowableRouter, withParams } from "itty-router-extras";
-import { createRenderer } from "#/lib/html";
-import { HtmlPage } from "#/pages/_document";
-import robots from "#/pages/robots";
+import { createRenderer } from "#lib/html.js";
+import { HtmlPage } from "#pages/_document.js";
+import robots from "#pages/robots.js";
 
 import { routes } from "./routes.js";
 

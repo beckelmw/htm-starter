@@ -1,4 +1,4 @@
-import html from "../lib/html.js";
+import html from "#lib/html.js";
 
 export const Header = () => {
   return html`
