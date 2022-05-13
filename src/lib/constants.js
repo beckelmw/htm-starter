@@ -6,3 +6,6 @@ export const SECURITY_HEADERS = {
   "x-frame-options": "DENY",
   "x-xss-protection": "1; mode=block",
 };
+
+export const TEXT_HTML = "text/html";
+export const APPLICATION_JSON = "application/json";

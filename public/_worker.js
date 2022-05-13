@@ -1,29 +1,725 @@
-var Gt=Object.create;var _e=Object.defineProperty;var Jt=Object.getOwnPropertyDescriptor;var Vt=Object.getOwnPropertyNames;var Yt=Object.getPrototypeOf,Qt=Object.prototype.hasOwnProperty;var k=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),G=(t,e)=>{for(var r in e)_e(t,r,{get:e[r],enumerable:!0})},Zt=(t,e,r,n)=>{if(e&&typeof e=="object"||typeof e=="function")for(let i of Vt(e))!Qt.call(t,i)&&i!==r&&_e(t,i,{get:()=>e[i],enumerable:!(n=Jt(e,i))||n.enumerable});return t};var jt=(t,e,r)=>(r=t!=null?Gt(Yt(t)):{},Zt(e||!t||!t.__esModule?_e(r,"default",{value:t,enumerable:!0}):r,t));var Re=k((Fr,Pe)=>{var Kt=async t=>{let e=t.headers.get("content-type");t.content=void 0;try{e&&e.includes("application/json")&&(t.content=await t.json())}catch{}};Pe.exports={withContent:Kt}});var Te=k((Or,Ee)=>{var Xt=t=>{t.cookies={};try{t.cookies=(t.headers.get("Cookie")||"").split(/;\s*/).map(e=>e.split("=")).reduce((e,[r,n])=>(e[r]=n,e),{})}catch{}};Ee.exports={withCookies:Xt}});var He=k((Dr,Ae)=>{var It=t=>{for(let e in t.params||{})t[e]=t.params[e]};Ae.exports={withParams:It}});var Fe=k((Mr,Ue)=>{Ue.exports={...Re(),...Te(),...He()}});var De=k((Nr,Oe)=>{var zt=(t="text/plain; charset=utf-8")=>(e,r={})=>{let{headers:n={},...i}=r;return typeof e=="object"?new Response(JSON.stringify(e),{headers:{"Content-Type":t,...n},...i}):new Response(e,r)};Oe.exports={createResponseType:zt}});var J=k((qr,Me)=>{var{createResponseType:er}=De(),tr=er("application/json; charset=utf-8");Me.exports={json:tr}});var ce=k((Lr,Ne)=>{var{json:rr}=J(),or=(t=500,e="Internal Server Error.")=>rr({...typeof e=="object"?e:{status:t,error:e}},{status:t});Ne.exports={error:or}});var Le=k((Br,qe)=>{var{error:nr}=ce(),sr=(t="Not found.")=>nr(404,t);qe.exports={missing:sr}});var We=k((Wr,Be)=>{var{json:ir}=J(),ar=(t,e)=>e?ir({...typeof e=="object"?e:{status:t,message:e}},{status:t}):new Response(null,{status:t});Be.exports={status:ar}});var Je=k((Gr,Ge)=>{var lr=(t,e={})=>new Response(t,e);Ge.exports={text:lr}});var pe=k((Jr,Ve)=>{Ve.exports={...ce(),...J(),...Le(),...We(),...Je()}});var Qe=k((Vr,Ye)=>{Ye.exports={Router:function({base:t="",routes:e=[]}={}){return{__proto__:new Proxy({},{get:(r,n,i)=>(o,...a)=>e.push([n.toUpperCase(),RegExp(`^${(t+o).replace(/(\/?)\*/g,"($1.*)?").replace(/\/$/,"").replace(/:(\w+)(\?)?(\.)?/g,"$2(?<$1>[^/]+)$2$3").replace(/\.(?=[\w(])/,"\\.").replace(/\)\.\?\(([^\[]+)\[\^/g,"?)\\.?($1(?<=\\.)[^\\.")}/*$`),a])&&i}),routes:e,async handle(r,...n){let i,o,a=new URL(r.url);r.query=Object.fromEntries(a.searchParams);for(var[u,p,d]of e)if((u===r.method||u==="ALL")&&(o=a.pathname.match(p))){r.params=o.groups;for(var s of d)if((i=await s(r.proxy||r,...n))!==void 0)return i}}}}}});var je=k((Yr,Ze)=>{"use strict";var{Router:_r}=Qe(),{error:cr}=pe(),pr=(t={})=>{let{stack:e=!1}=t;return new Proxy(_r(t),{get:(r,n)=>(...i)=>n==="handle"?r[n](...i).catch(o=>cr(o.status||500,{status:o.status||500,error:o.message,stack:e&&o.stack||void 0})):r[n](...i)})};Ze.exports={ThrowableRouter:pr}});var Xe=k((Qr,Ke)=>{Ke.exports={...je()}});var ze=k((Zr,Ie)=>{var ue=class extends Error{constructor(e=500,r="Internal Error."){super(r),this.name="StatusError",this.status=e}};Ie.exports={StatusError:ue}});var tt=k((jr,et)=>{et.exports={...ze()}});var ot=k((Kr,rt)=>{rt.exports={...Fe(),...pe(),...Xe(),...tt()}});var X=jt(ot(),1);var st=function(t,e,r,n){var i;e[0]=0;for(var o=1;o<e.length;o++){var a=e[o++],u=e[o]?(e[0]|=a?1:2,r[e[o++]]):e[++o];a===3?n[0]=u:a===4?n[1]=Object.assign(n[1]||{},u):a===5?(n[1]=n[1]||{})[e[++o]]=u:a===6?n[1][e[++o]]+=u+"":a?(i=t.apply(u,st(t,u,r,["",null])),n.push(i),u[0]?e[0]|=2:(e[o-2]=0,e[o]=i)):n.push(u)}return n},nt=new Map;function it(t){var e=nt.get(this);return e||(e=new Map,nt.set(this,e)),(e=st(this,e.get(t)||(e.set(t,e=function(r){for(var n,i,o=1,a="",u="",p=[0],d=function(l){o===1&&(l||(a=a.replace(/^\s*\n\s*|\s*\n\s*$/g,"")))?p.push(0,l,a):o===3&&(l||a)?(p.push(3,l,a),o=2):o===2&&a==="..."&&l?p.push(4,l,0):o===2&&a&&!l?p.push(5,0,!0,a):o>=5&&((a||!l&&o===5)&&(p.push(o,0,a,i),o=6),l&&(p.push(o,l,0,i),o=6)),a=""},s=0;s<r.length;s++){s&&(o===1&&d(),d(s));for(var f=0;f<r[s].length;f++)n=r[s][f],o===1?n==="<"?(d(),p=[p],o=3):a+=n:o===4?a==="--"&&n===">"?(o=1,a=""):a=n+a[0]:u?n===u?u="":a+=n:n==='"'||n==="'"?u=n:n===">"?(d(),o=1):o&&(n==="="?(o=5,i=a,a=""):n==="/"&&(o<5||r[s][f+1]===">")?(d(),o===3&&(p=p[0]),o=p,(p=p[0]).push(2,0,o),o=0):n===" "||n==="	"||n===`
-`||n==="\r"?(d(),o=2):a+=n),o===3&&a==="!--"&&(o=4,p=p[0])}return d(),p}(t)),e),arguments,[])).length>1?e:e[0]}var fe,m,ut,ur,M,ft,at,fr,dt={},ht=[],dr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function H(t,e){for(var r in e)t[r]=e[r];return t}function mt(t){var e=t.parentNode;e&&e.removeChild(t)}function vt(t,e,r){var n,i,o,a={};for(o in e)o=="key"?n=e[o]:o=="ref"?i=e[o]:a[o]=e[o];if(arguments.length>2&&(a.children=arguments.length>3?fe.call(arguments,2):r),typeof t=="function"&&t.defaultProps!=null)for(o in t.defaultProps)a[o]===void 0&&(a[o]=t.defaultProps[o]);return V(t,a,n,i,null)}function V(t,e,r,n,i){var o={type:t,props:e,key:r,ref:n,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:i??++ut};return i==null&&m.vnode!=null&&m.vnode(o),o}function N(t){return t.children}function Y(t,e){this.props=t,this.context=e}function D(t,e){if(e==null)return t.__?D(t.__,t.__.__k.indexOf(t)+1):null;for(var r;e<t.__k.length;e++)if((r=t.__k[e])!=null&&r.__e!=null)return r.__e;return typeof t.type=="function"?D(t):null}function yt(t){var e,r;if((t=t.__)!=null&&t.__c!=null){for(t.__e=t.__c.base=null,e=0;e<t.__k.length;e++)if((r=t.__k[e])!=null&&r.__e!=null){t.__e=t.__c.base=r.__e;break}return yt(t)}}function lt(t){(!t.__d&&(t.__d=!0)&&M.push(t)&&!Q.__r++||at!==m.debounceRendering)&&((at=m.debounceRendering)||ft)(Q)}function Q(){for(var t;Q.__r=M.length;)t=M.sort(function(e,r){return e.__v.__b-r.__v.__b}),M=[],t.some(function(e){var r,n,i,o,a,u;e.__d&&(a=(o=(r=e).__v).__e,(u=r.__P)&&(n=[],(i=H({},o)).__v=o.__v+1,kt(u,o,i,r.__n,u.ownerSVGElement!==void 0,o.__h!=null?[a]:null,n,a??D(o),o.__h),mr(n,o),o.__e!=a&&yt(o)))})}function gt(t,e,r,n,i,o,a,u,p,d){var s,f,l,c,h,P,_,y=n&&n.__k||ht,w=y.length;for(r.__k=[],s=0;s<e.length;s++)if((c=r.__k[s]=(c=e[s])==null||typeof c=="boolean"?null:typeof c=="string"||typeof c=="number"||typeof c=="bigint"?V(null,c,null,null,c):Array.isArray(c)?V(N,{children:c},null,null,null):c.__b>0?V(c.type,c.props,c.key,null,c.__v):c)!=null){if(c.__=r,c.__b=r.__b+1,(l=y[s])===null||l&&c.key==l.key&&c.type===l.type)y[s]=void 0;else for(f=0;f<w;f++){if((l=y[f])&&c.key==l.key&&c.type===l.type){y[f]=void 0;break}l=null}kt(t,c,l=l||dt,i,o,a,u,p,d),h=c.__e,(f=c.ref)&&l.ref!=f&&(_||(_=[]),l.ref&&_.push(l.ref,null,c),_.push(f,c.__c||h,c)),h!=null?(P==null&&(P=h),typeof c.type=="function"&&c.__k===l.__k?c.__d=p=xt(c,p,t):p=bt(t,c,l,y,h,p),typeof r.type=="function"&&(r.__d=p)):p&&l.__e==p&&p.parentNode!=t&&(p=D(l))}for(r.__e=P,s=w;s--;)y[s]!=null&&(typeof r.type=="function"&&y[s].__e!=null&&y[s].__e==r.__d&&(r.__d=D(n,s+1)),Ct(y[s],y[s]));if(_)for(s=0;s<_.length;s++)wt(_[s],_[++s],_[++s])}function xt(t,e,r){for(var n,i=t.__k,o=0;i&&o<i.length;o++)(n=i[o])&&(n.__=t,e=typeof n.type=="function"?xt(n,e,r):bt(r,n,n,i,n.__e,e));return e}function bt(t,e,r,n,i,o){var a,u,p;if(e.__d!==void 0)a=e.__d,e.__d=void 0;else if(r==null||i!=o||i.parentNode==null)e:if(o==null||o.parentNode!==t)t.appendChild(i),a=null;else{for(u=o,p=0;(u=u.nextSibling)&&p<n.length;p+=2)if(u==i)break e;t.insertBefore(i,o),a=o}return a!==void 0?a:i.nextSibling}function hr(t,e,r,n,i){var o;for(o in r)o==="children"||o==="key"||o in e||Z(t,o,null,r[o],n);for(o in e)i&&typeof e[o]!="function"||o==="children"||o==="key"||o==="value"||o==="checked"||r[o]===e[o]||Z(t,o,e[o],r[o],n)}function _t(t,e,r){e[0]==="-"?t.setProperty(e,r):t[e]=r==null?"":typeof r!="number"||dr.test(e)?r:r+"px"}function Z(t,e,r,n,i){var o;e:if(e==="style")if(typeof r=="string")t.style.cssText=r;else{if(typeof n=="string"&&(t.style.cssText=n=""),n)for(e in n)r&&e in r||_t(t.style,e,"");if(r)for(e in r)n&&r[e]===n[e]||_t(t.style,e,r[e])}else if(e[0]==="o"&&e[1]==="n")o=e!==(e=e.replace(/Capture$/,"")),e=e.toLowerCase()in t?e.toLowerCase().slice(2):e.slice(2),t.l||(t.l={}),t.l[e+o]=r,r?n||t.addEventListener(e,o?pt:ct,o):t.removeEventListener(e,o?pt:ct,o);else if(e!=="dangerouslySetInnerHTML"){if(i)e=e.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if(e!=="href"&&e!=="list"&&e!=="form"&&e!=="tabIndex"&&e!=="download"&&e in t)try{t[e]=r??"";break e}catch{}typeof r=="function"||(r!=null&&(r!==!1||e[0]==="a"&&e[1]==="r")?t.setAttribute(e,r):t.removeAttribute(e))}}function ct(t){this.l[t.type+!1](m.event?m.event(t):t)}function pt(t){this.l[t.type+!0](m.event?m.event(t):t)}function kt(t,e,r,n,i,o,a,u,p){var d,s,f,l,c,h,P,_,y,w,F,C=e.type;if(e.constructor!==void 0)return null;r.__h!=null&&(p=r.__h,u=e.__e=r.__e,e.__h=null,o=[u]),(d=m.__b)&&d(e);try{e:if(typeof C=="function"){if(_=e.props,y=(d=C.contextType)&&n[d.__c],w=d?y?y.props.value:d.__:n,r.__c?P=(s=e.__c=r.__c).__=s.__E:("prototype"in C&&C.prototype.render?e.__c=s=new C(_,w):(e.__c=s=new Y(_,w),s.constructor=C,s.render=yr),y&&y.sub(s),s.props=_,s.state||(s.state={}),s.context=w,s.__n=n,f=s.__d=!0,s.__h=[]),s.__s==null&&(s.__s=s.state),C.getDerivedStateFromProps!=null&&(s.__s==s.state&&(s.__s=H({},s.__s)),H(s.__s,C.getDerivedStateFromProps(_,s.__s))),l=s.props,c=s.state,f)C.getDerivedStateFromProps==null&&s.componentWillMount!=null&&s.componentWillMount(),s.componentDidMount!=null&&s.__h.push(s.componentDidMount);else{if(C.getDerivedStateFromProps==null&&_!==l&&s.componentWillReceiveProps!=null&&s.componentWillReceiveProps(_,w),!s.__e&&s.shouldComponentUpdate!=null&&s.shouldComponentUpdate(_,s.__s,w)===!1||e.__v===r.__v){s.props=_,s.state=s.__s,e.__v!==r.__v&&(s.__d=!1),s.__v=e,e.__e=r.__e,e.__k=r.__k,e.__k.forEach(function(R){R&&(R.__=e)}),s.__h.length&&a.push(s);break e}s.componentWillUpdate!=null&&s.componentWillUpdate(_,s.__s,w),s.componentDidUpdate!=null&&s.__h.push(function(){s.componentDidUpdate(l,c,h)})}s.context=w,s.props=_,s.state=s.__s,(d=m.__r)&&d(e),s.__d=!1,s.__v=e,s.__P=t,d=s.render(s.props,s.state,s.context),s.state=s.__s,s.getChildContext!=null&&(n=H(H({},n),s.getChildContext())),f||s.getSnapshotBeforeUpdate==null||(h=s.getSnapshotBeforeUpdate(l,c)),F=d!=null&&d.type===N&&d.key==null?d.props.children:d,gt(t,Array.isArray(F)?F:[F],e,r,n,i,o,a,u,p),s.base=e.__e,e.__h=null,s.__h.length&&a.push(s),P&&(s.__E=s.__=null),s.__e=!1}else o==null&&e.__v===r.__v?(e.__k=r.__k,e.__e=r.__e):e.__e=vr(r.__e,e,r,n,i,o,a,p);(d=m.diffed)&&d(e)}catch(R){e.__v=null,(p||o!=null)&&(e.__e=u,e.__h=!!p,o[o.indexOf(u)]=null),m.__e(R,e,r)}}function mr(t,e){m.__c&&m.__c(e,t),t.some(function(r){try{t=r.__h,r.__h=[],t.some(function(n){n.call(r)})}catch(n){m.__e(n,r.__v)}})}function vr(t,e,r,n,i,o,a,u){var p,d,s,f=r.props,l=e.props,c=e.type,h=0;if(c==="svg"&&(i=!0),o!=null){for(;h<o.length;h++)if((p=o[h])&&"setAttribute"in p==!!c&&(c?p.localName===c:p.nodeType===3)){t=p,o[h]=null;break}}if(t==null){if(c===null)return document.createTextNode(l);t=i?document.createElementNS("http://www.w3.org/2000/svg",c):document.createElement(c,l.is&&l),o=null,u=!1}if(c===null)f===l||u&&t.data===l||(t.data=l);else{if(o=o&&fe.call(t.childNodes),d=(f=r.props||dt).dangerouslySetInnerHTML,s=l.dangerouslySetInnerHTML,!u){if(o!=null)for(f={},h=0;h<t.attributes.length;h++)f[t.attributes[h].name]=t.attributes[h].value;(s||d)&&(s&&(d&&s.__html==d.__html||s.__html===t.innerHTML)||(t.innerHTML=s&&s.__html||""))}if(hr(t,l,f,i,u),s)e.__k=[];else if(h=e.props.children,gt(t,Array.isArray(h)?h:[h],e,r,n,i&&c!=="foreignObject",o,a,o?o[0]:r.__k&&D(r,0),u),o!=null)for(h=o.length;h--;)o[h]!=null&&mt(o[h]);u||("value"in l&&(h=l.value)!==void 0&&(h!==t.value||c==="progress"&&!h||c==="option"&&h!==f.value)&&Z(t,"value",h,f.value,!1),"checked"in l&&(h=l.checked)!==void 0&&h!==t.checked&&Z(t,"checked",h,f.checked,!1))}return t}function wt(t,e,r){try{typeof t=="function"?t(e):t.current=e}catch(n){m.__e(n,r)}}function Ct(t,e,r){var n,i;if(m.unmount&&m.unmount(t),(n=t.ref)&&(n.current&&n.current!==t.__e||wt(n,null,e)),(n=t.__c)!=null){if(n.componentWillUnmount)try{n.componentWillUnmount()}catch(o){m.__e(o,e)}n.base=n.__P=null}if(n=t.__k)for(i=0;i<n.length;i++)n[i]&&Ct(n[i],e,typeof t.type!="function");r||t.__e==null||mt(t.__e),t.__e=t.__d=void 0}function yr(t,e,r){return this.constructor(t,r)}fe=ht.slice,m={__e:function(t,e,r,n){for(var i,o,a;e=e.__;)if((i=e.__c)&&!i.__)try{if((o=i.constructor)&&o.getDerivedStateFromError!=null&&(i.setState(o.getDerivedStateFromError(t)),a=i.__d),i.componentDidCatch!=null&&(i.componentDidCatch(t,n||{}),a=i.__d),a)return i.__E=i}catch(u){t=u}throw t}},ut=0,ur=function(t){return t!=null&&t.constructor===void 0},Y.prototype.setState=function(t,e){var r;r=this.__s!=null&&this.__s!==this.state?this.__s:this.__s=H({},this.state),typeof t=="function"&&(t=t(H({},r),this.props)),t&&H(r,t),t!=null&&this.__v&&(e&&this.__h.push(e),lt(this))},Y.prototype.forceUpdate=function(t){this.__v&&(this.__e=!0,t&&this.__h.push(t),lt(this))},Y.prototype.render=N,M=[],ft=typeof Promise=="function"?Promise.prototype.then.bind(Promise.resolve()):setTimeout,Q.__r=0,fr=0;var gr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|^--/i,xr=/[&<>"]/;function St(t){var e=String(t);return xr.test(e)?e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"):e}var $t=function(t,e){return String(t).replace(/(\n+)/g,"$1"+(e||"	"))},Pt=function(t,e,r){return String(t).length>(e||40)||!r&&String(t).indexOf(`
-`)!==-1||String(t).indexOf("<")!==-1},Rt={};function br(t){var e="";for(var r in t){var n=t[r];n!=null&&n!==""&&(e&&(e+=" "),e+=r[0]=="-"?r:Rt[r]||(Rt[r]=r.replace(/([A-Z])/g,"-$1").toLowerCase()),e+=": ",e+=n,typeof n=="number"&&gr.test(r)===!1&&(e+="px"),e+=";")}return e||void 0}function j(t,e){for(var r in e)t[r]=e[r];return t}function he(t,e){return Array.isArray(e)?e.reduce(he,t):e!=null&&e!==!1&&t.push(e),t}var kr={shallow:!0},de=[],wr=/^(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)$/,Et=/[\s\n\\/='"\0<>]/;function Tt(){this.__d=!0}U.render=U;var Cr=function(t,e){return U(t,e,kr)},At=[];function U(t,e,r){e=e||{},r=r||{};var n=m.__s;m.__s=!0;var i=q(t,e,r);return m.__c&&m.__c(t,At),At.length=0,m.__s=n,i}function q(t,e,r,n,i,o){if(t==null||typeof t=="boolean")return"";if(typeof t!="object")return St(t);var a=r.pretty,u=a&&typeof a=="string"?a:"	";if(Array.isArray(t)){for(var p="",d=0;d<t.length;d++)a&&d>0&&(p+=`
-`),p+=q(t[d],e,r,n,i,o);return p}var s,f=t.type,l=t.props,c=!1;if(typeof f=="function"){if(c=!0,!r.shallow||!n&&r.renderRootComponent!==!1){if(f===N){var h=[];return he(h,t.props.children),q(h,e,r,r.shallowHighOrder!==!1,i,o)}var P,_=t.__c={__v:t,context:e,props:t.props,setState:Tt,forceUpdate:Tt,__d:!0,__h:[]};m.__b&&m.__b(t);var y=m.__r;if(f.prototype&&typeof f.prototype.render=="function"){var w=f.contextType,F=w&&e[w.__c],C=w!=null?F?F.props.value:w.__:e;(_=t.__c=new f(l,C)).__v=t,_._dirty=_.__d=!0,_.props=l,_.state==null&&(_.state={}),_._nextState==null&&_.__s==null&&(_._nextState=_.__s=_.state),_.context=C,f.getDerivedStateFromProps?_.state=j(j({},_.state),f.getDerivedStateFromProps(_.props,_.state)):_.componentWillMount&&(_.componentWillMount(),_.state=_._nextState!==_.state?_._nextState:_.__s!==_.state?_.__s:_.state),y&&y(t),P=_.render(_.props,_.state,_.context)}else for(var R=f.contextType,Ce=R&&e[R.__c],Lt=R!=null?Ce?Ce.props.value:R.__:e,Bt=0;_.__d&&Bt++<25;)_.__d=!1,y&&y(t),P=f.call(t.__c,l,Lt);return _.getChildContext&&(e=j(j({},e),_.getChildContext())),m.diffed&&m.diffed(t),q(P,e,r,r.shallowHighOrder!==!1,i,o)}f=(s=f).displayName||s!==Function&&s.name||function(ie){var ae=(Function.prototype.toString.call(ie).match(/^\s*function\s+([^( ]+)/)||"")[1];if(!ae){for(var W=-1,le=de.length;le--;)if(de[le]===ie){W=le;break}W<0&&(W=de.push(ie)-1),ae="UnnamedComponent"+W}return ae}(s)}var L,A,g="<"+f;if(l){var I=Object.keys(l);r&&r.sortAttributes===!0&&I.sort();for(var z=0;z<I.length;z++){var v=I[z],x=l[v];if(v!=="children"){if(!Et.test(v)&&(r&&r.allAttributes||v!=="key"&&v!=="ref"&&v!=="__self"&&v!=="__source")){if(v==="defaultValue")v="value";else if(v==="className"){if(l.class!==void 0)continue;v="class"}else i&&v.match(/^xlink:?./)&&(v=v.toLowerCase().replace(/^xlink:?/,"xlink:"));if(v==="htmlFor"){if(l.for)continue;v="for"}v==="style"&&x&&typeof x=="object"&&(x=br(x)),v[0]==="a"&&v[1]==="r"&&typeof x=="boolean"&&(x=String(x));var ee=r.attributeHook&&r.attributeHook(v,x,e,r,c);if(ee||ee==="")g+=ee;else if(v==="dangerouslySetInnerHTML")A=x&&x.__html;else if(f==="textarea"&&v==="value")L=x;else if((x||x===0||x==="")&&typeof x!="function"){if(!(x!==!0&&x!==""||(x=v,r&&r.xml))){g+=" "+v;continue}if(v==="value"){if(f==="select"){o=x;continue}f==="option"&&o==x&&l.selected===void 0&&(g+=" selected")}g+=" "+v+'="'+St(x)+'"'}}}else L=x}}if(a){var te=g.replace(/\n\s*/," ");te===g||~te.indexOf(`
-`)?a&&~g.indexOf(`
-`)&&(g+=`
-`):g=te}if(g+=">",Et.test(f))throw new Error(f+" is not a valid HTML tag name in "+g);var B,Wt=wr.test(f)||r.voidElements&&r.voidElements.test(f),E=[];if(A)a&&Pt(A)&&(A=`
-`+u+$t(A,u)),g+=A;else if(L!=null&&he(B=[],L).length){for(var re=a&&~g.indexOf(`
-`),Se=!1,oe=0;oe<B.length;oe++){var ne=B[oe];if(ne!=null&&ne!==!1){var O=q(ne,e,r,!0,f==="svg"||f!=="foreignObject"&&i,o);if(a&&!re&&Pt(O)&&(re=!0),O)if(a){var $e=O.length>0&&O[0]!="<";Se&&$e?E[E.length-1]+=O:E.push(O),Se=$e}else E.push(O)}}if(a&&re)for(var se=E.length;se--;)E[se]=`
-`+u+$t(E[se],u)}if(E.length||A)g+=E.join("");else if(r&&r.xml)return g.substring(0,g.length-1)+" />";return!Wt||B||A?(a&&~g.indexOf(`
-`)&&(g+=`
-`),g+="</"+f+">"):g=g.replace(/>$/," />"),g}U.shallowRender=Cr;var Ht={"strict-transport-security":"max-age=63072000; includeSubdomains; preload","content-security-policy":"default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'","x-content-type-options":"nosniff","x-frame-options":"DENY","x-xss-protection":"1; mode=block"};var S=()=>b`
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+
+// node_modules/itty-router-extras/middleware/withContent.js
+var require_withContent = __commonJS({
+  "node_modules/itty-router-extras/middleware/withContent.js"(exports, module) {
+    var withContent = async (t3) => {
+      let n4 = t3.headers.get("content-type");
+      t3.content = void 0;
+      try {
+        n4 && n4.includes("application/json") && (t3.content = await t3.json());
+      } catch (t4) {
+      }
+    };
+    module.exports = { withContent };
+  }
+});
+
+// node_modules/itty-router-extras/middleware/withCookies.js
+var require_withCookies = __commonJS({
+  "node_modules/itty-router-extras/middleware/withCookies.js"(exports, module) {
+    var withCookies = (o3) => {
+      o3.cookies = {};
+      try {
+        o3.cookies = (o3.headers.get("Cookie") || "").split(/;\s*/).map((o4) => o4.split("=")).reduce((o4, [e2, i3]) => (o4[e2] = i3, o4), {});
+      } catch (o4) {
+      }
+    };
+    module.exports = { withCookies };
+  }
+});
+
+// node_modules/itty-router-extras/middleware/withParams.js
+var require_withParams = __commonJS({
+  "node_modules/itty-router-extras/middleware/withParams.js"(exports, module) {
+    var withParams2 = (a3) => {
+      for (const s3 in a3.params || {})
+        a3[s3] = a3.params[s3];
+    };
+    module.exports = { withParams: withParams2 };
+  }
+});
+
+// node_modules/itty-router-extras/middleware/index.js
+var require_middleware = __commonJS({
+  "node_modules/itty-router-extras/middleware/index.js"(exports, module) {
+    module.exports = { ...require_withContent(), ...require_withCookies(), ...require_withParams() };
+  }
+});
+
+// node_modules/itty-router-extras/response/createResponseType.js
+var require_createResponseType = __commonJS({
+  "node_modules/itty-router-extras/response/createResponseType.js"(exports, module) {
+    var createResponseType = (e2 = "text/plain; charset=utf-8") => (s3, t3 = {}) => {
+      const { headers: n4 = {}, ...o3 } = t3;
+      return typeof s3 == "object" ? new Response(JSON.stringify(s3), { headers: { "Content-Type": e2, ...n4 }, ...o3 }) : new Response(s3, t3);
+    };
+    module.exports = { createResponseType };
+  }
+});
+
+// node_modules/itty-router-extras/response/json.js
+var require_json = __commonJS({
+  "node_modules/itty-router-extras/response/json.js"(exports, module) {
+    var { createResponseType } = require_createResponseType();
+    var json = createResponseType("application/json; charset=utf-8");
+    module.exports = { json };
+  }
+});
+
+// node_modules/itty-router-extras/response/error.js
+var require_error = __commonJS({
+  "node_modules/itty-router-extras/response/error.js"(exports, module) {
+    var { json } = require_json();
+    var error = (r3 = 500, o3 = "Internal Server Error.") => json({ ...typeof o3 == "object" ? o3 : { status: r3, error: o3 } }, { status: r3 });
+    module.exports = { error };
+  }
+});
+
+// node_modules/itty-router-extras/response/missing.js
+var require_missing = __commonJS({
+  "node_modules/itty-router-extras/response/missing.js"(exports, module) {
+    var { error } = require_error();
+    var missing = (r3 = "Not found.") => error(404, r3);
+    module.exports = { missing };
+  }
+});
+
+// node_modules/itty-router-extras/response/status.js
+var require_status = __commonJS({
+  "node_modules/itty-router-extras/response/status.js"(exports, module) {
+    var { json } = require_json();
+    var status = (s3, t3) => t3 ? json({ ...typeof t3 == "object" ? t3 : { status: s3, message: t3 } }, { status: s3 }) : new Response(null, { status: s3 });
+    module.exports = { status };
+  }
+});
+
+// node_modules/itty-router-extras/response/text.js
+var require_text = __commonJS({
+  "node_modules/itty-router-extras/response/text.js"(exports, module) {
+    var text = (e2, t3 = {}) => new Response(e2, t3);
+    module.exports = { text };
+  }
+});
+
+// node_modules/itty-router-extras/response/index.js
+var require_response = __commonJS({
+  "node_modules/itty-router-extras/response/index.js"(exports, module) {
+    module.exports = { ...require_error(), ...require_json(), ...require_missing(), ...require_status(), ...require_text() };
+  }
+});
+
+// node_modules/itty-router/dist/itty-router.min.js
+var require_itty_router_min = __commonJS({
+  "node_modules/itty-router/dist/itty-router.min.js"(exports, module) {
+    module.exports = { Router: function({ base: t3 = "", routes: n4 = [] } = {}) {
+      return { __proto__: new Proxy({}, { get: (e2, a3, o3) => (e3, ...r3) => n4.push([a3.toUpperCase(), RegExp(`^${(t3 + e3).replace(/(\/?)\*/g, "($1.*)?").replace(/\/$/, "").replace(/:(\w+)(\?)?(\.)?/g, "$2(?<$1>[^/]+)$2$3").replace(/\.(?=[\w(])/, "\\.").replace(/\)\.\?\(([^\[]+)\[\^/g, "?)\\.?($1(?<=\\.)[^\\.")}/*$`), r3]) && o3 }), routes: n4, async handle(e2, ...r3) {
+        let a3, o3, t4 = new URL(e2.url);
+        e2.query = Object.fromEntries(t4.searchParams);
+        for (var [p2, s3, u3] of n4)
+          if ((p2 === e2.method || p2 === "ALL") && (o3 = t4.pathname.match(s3))) {
+            e2.params = o3.groups;
+            for (var c3 of u3)
+              if ((a3 = await c3(e2.proxy || e2, ...r3)) !== void 0)
+                return a3;
+          }
+      } };
+    } };
+  }
+});
+
+// node_modules/itty-router-extras/router/ThrowableRouter.js
+var require_ThrowableRouter = __commonJS({
+  "node_modules/itty-router-extras/router/ThrowableRouter.js"(exports, module) {
+    "use strict";
+    var { Router: Router2 } = require_itty_router_min();
+    var { error } = require_response();
+    var ThrowableRouter2 = (r3 = {}) => {
+      const { stack: e2 = false } = r3;
+      return new Proxy(Router2(r3), { get: (r4, t3) => (...o3) => t3 === "handle" ? r4[t3](...o3).catch((r5) => error(r5.status || 500, { status: r5.status || 500, error: r5.message, stack: e2 && r5.stack || void 0 })) : r4[t3](...o3) });
+    };
+    module.exports = { ThrowableRouter: ThrowableRouter2 };
+  }
+});
+
+// node_modules/itty-router-extras/router/index.js
+var require_router = __commonJS({
+  "node_modules/itty-router-extras/router/index.js"(exports, module) {
+    module.exports = { ...require_ThrowableRouter() };
+  }
+});
+
+// node_modules/itty-router-extras/classes/StatusError.js
+var require_StatusError = __commonJS({
+  "node_modules/itty-router-extras/classes/StatusError.js"(exports, module) {
+    var StatusError = class extends Error {
+      constructor(r3 = 500, t3 = "Internal Error.") {
+        super(t3), this.name = "StatusError", this.status = r3;
+      }
+    };
+    module.exports = { StatusError };
+  }
+});
+
+// node_modules/itty-router-extras/classes/index.js
+var require_classes = __commonJS({
+  "node_modules/itty-router-extras/classes/index.js"(exports, module) {
+    module.exports = { ...require_StatusError() };
+  }
+});
+
+// node_modules/itty-router-extras/index.js
+var require_itty_router_extras = __commonJS({
+  "node_modules/itty-router-extras/index.js"(exports, module) {
+    module.exports = { ...require_middleware(), ...require_response(), ...require_router(), ...require_classes() };
+  }
+});
+
+// src/lib/router.js
+var import_itty_router_extras = __toESM(require_itty_router_extras(), 1);
+
+// node_modules/htm/dist/htm.module.js
+var n = function(t3, s3, r3, e2) {
+  var u3;
+  s3[0] = 0;
+  for (var h3 = 1; h3 < s3.length; h3++) {
+    var p2 = s3[h3++], a3 = s3[h3] ? (s3[0] |= p2 ? 1 : 2, r3[s3[h3++]]) : s3[++h3];
+    p2 === 3 ? e2[0] = a3 : p2 === 4 ? e2[1] = Object.assign(e2[1] || {}, a3) : p2 === 5 ? (e2[1] = e2[1] || {})[s3[++h3]] = a3 : p2 === 6 ? e2[1][s3[++h3]] += a3 + "" : p2 ? (u3 = t3.apply(a3, n(t3, a3, r3, ["", null])), e2.push(u3), a3[0] ? s3[0] |= 2 : (s3[h3 - 2] = 0, s3[h3] = u3)) : e2.push(a3);
+  }
+  return e2;
+};
+var t = /* @__PURE__ */ new Map();
+function htm_module_default(s3) {
+  var r3 = t.get(this);
+  return r3 || (r3 = /* @__PURE__ */ new Map(), t.set(this, r3)), (r3 = n(this, r3.get(s3) || (r3.set(s3, r3 = function(n4) {
+    for (var t3, s4, r4 = 1, e2 = "", u3 = "", h3 = [0], p2 = function(n5) {
+      r4 === 1 && (n5 || (e2 = e2.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h3.push(0, n5, e2) : r4 === 3 && (n5 || e2) ? (h3.push(3, n5, e2), r4 = 2) : r4 === 2 && e2 === "..." && n5 ? h3.push(4, n5, 0) : r4 === 2 && e2 && !n5 ? h3.push(5, 0, true, e2) : r4 >= 5 && ((e2 || !n5 && r4 === 5) && (h3.push(r4, 0, e2, s4), r4 = 6), n5 && (h3.push(r4, n5, 0, s4), r4 = 6)), e2 = "";
+    }, a3 = 0; a3 < n4.length; a3++) {
+      a3 && (r4 === 1 && p2(), p2(a3));
+      for (var l3 = 0; l3 < n4[a3].length; l3++)
+        t3 = n4[a3][l3], r4 === 1 ? t3 === "<" ? (p2(), h3 = [h3], r4 = 3) : e2 += t3 : r4 === 4 ? e2 === "--" && t3 === ">" ? (r4 = 1, e2 = "") : e2 = t3 + e2[0] : u3 ? t3 === u3 ? u3 = "" : e2 += t3 : t3 === '"' || t3 === "'" ? u3 = t3 : t3 === ">" ? (p2(), r4 = 1) : r4 && (t3 === "=" ? (r4 = 5, s4 = e2, e2 = "") : t3 === "/" && (r4 < 5 || n4[a3][l3 + 1] === ">") ? (p2(), r4 === 3 && (h3 = h3[0]), r4 = h3, (h3 = h3[0]).push(2, 0, r4), r4 = 0) : t3 === " " || t3 === "	" || t3 === "\n" || t3 === "\r" ? (p2(), r4 = 2) : e2 += t3), r4 === 3 && e2 === "!--" && (r4 = 4, h3 = h3[0]);
+    }
+    return p2(), h3;
+  }(s3)), r3), arguments, [])).length > 1 ? r3 : r3[0];
+}
+
+// node_modules/preact/dist/preact.module.js
+var n2;
+var l;
+var u;
+var i;
+var t2;
+var o;
+var r;
+var f;
+var e = {};
+var c = [];
+var s = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+function a(n4, l3) {
+  for (var u3 in l3)
+    n4[u3] = l3[u3];
+  return n4;
+}
+function h(n4) {
+  var l3 = n4.parentNode;
+  l3 && l3.removeChild(n4);
+}
+function v(l3, u3, i3) {
+  var t3, o3, r3, f3 = {};
+  for (r3 in u3)
+    r3 == "key" ? t3 = u3[r3] : r3 == "ref" ? o3 = u3[r3] : f3[r3] = u3[r3];
+  if (arguments.length > 2 && (f3.children = arguments.length > 3 ? n2.call(arguments, 2) : i3), typeof l3 == "function" && l3.defaultProps != null)
+    for (r3 in l3.defaultProps)
+      f3[r3] === void 0 && (f3[r3] = l3.defaultProps[r3]);
+  return y(l3, f3, t3, o3, null);
+}
+function y(n4, i3, t3, o3, r3) {
+  var f3 = { type: n4, props: i3, key: t3, ref: o3, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: r3 == null ? ++u : r3 };
+  return r3 == null && l.vnode != null && l.vnode(f3), f3;
+}
+function d(n4) {
+  return n4.children;
+}
+function _(n4, l3) {
+  this.props = n4, this.context = l3;
+}
+function k(n4, l3) {
+  if (l3 == null)
+    return n4.__ ? k(n4.__, n4.__.__k.indexOf(n4) + 1) : null;
+  for (var u3; l3 < n4.__k.length; l3++)
+    if ((u3 = n4.__k[l3]) != null && u3.__e != null)
+      return u3.__e;
+  return typeof n4.type == "function" ? k(n4) : null;
+}
+function b(n4) {
+  var l3, u3;
+  if ((n4 = n4.__) != null && n4.__c != null) {
+    for (n4.__e = n4.__c.base = null, l3 = 0; l3 < n4.__k.length; l3++)
+      if ((u3 = n4.__k[l3]) != null && u3.__e != null) {
+        n4.__e = n4.__c.base = u3.__e;
+        break;
+      }
+    return b(n4);
+  }
+}
+function m(n4) {
+  (!n4.__d && (n4.__d = true) && t2.push(n4) && !g.__r++ || r !== l.debounceRendering) && ((r = l.debounceRendering) || o)(g);
+}
+function g() {
+  for (var n4; g.__r = t2.length; )
+    n4 = t2.sort(function(n5, l3) {
+      return n5.__v.__b - l3.__v.__b;
+    }), t2 = [], n4.some(function(n5) {
+      var l3, u3, i3, t3, o3, r3;
+      n5.__d && (o3 = (t3 = (l3 = n5).__v).__e, (r3 = l3.__P) && (u3 = [], (i3 = a({}, t3)).__v = t3.__v + 1, j(r3, t3, i3, l3.__n, r3.ownerSVGElement !== void 0, t3.__h != null ? [o3] : null, u3, o3 == null ? k(t3) : o3, t3.__h), z(u3, t3), t3.__e != o3 && b(t3)));
+    });
+}
+function w(n4, l3, u3, i3, t3, o3, r3, f3, s3, a3) {
+  var h3, v3, p2, _3, b2, m3, g3, w2 = i3 && i3.__k || c, A = w2.length;
+  for (u3.__k = [], h3 = 0; h3 < l3.length; h3++)
+    if ((_3 = u3.__k[h3] = (_3 = l3[h3]) == null || typeof _3 == "boolean" ? null : typeof _3 == "string" || typeof _3 == "number" || typeof _3 == "bigint" ? y(null, _3, null, null, _3) : Array.isArray(_3) ? y(d, { children: _3 }, null, null, null) : _3.__b > 0 ? y(_3.type, _3.props, _3.key, null, _3.__v) : _3) != null) {
+      if (_3.__ = u3, _3.__b = u3.__b + 1, (p2 = w2[h3]) === null || p2 && _3.key == p2.key && _3.type === p2.type)
+        w2[h3] = void 0;
+      else
+        for (v3 = 0; v3 < A; v3++) {
+          if ((p2 = w2[v3]) && _3.key == p2.key && _3.type === p2.type) {
+            w2[v3] = void 0;
+            break;
+          }
+          p2 = null;
+        }
+      j(n4, _3, p2 = p2 || e, t3, o3, r3, f3, s3, a3), b2 = _3.__e, (v3 = _3.ref) && p2.ref != v3 && (g3 || (g3 = []), p2.ref && g3.push(p2.ref, null, _3), g3.push(v3, _3.__c || b2, _3)), b2 != null ? (m3 == null && (m3 = b2), typeof _3.type == "function" && _3.__k === p2.__k ? _3.__d = s3 = x(_3, s3, n4) : s3 = P(n4, _3, p2, w2, b2, s3), typeof u3.type == "function" && (u3.__d = s3)) : s3 && p2.__e == s3 && s3.parentNode != n4 && (s3 = k(p2));
+    }
+  for (u3.__e = m3, h3 = A; h3--; )
+    w2[h3] != null && (typeof u3.type == "function" && w2[h3].__e != null && w2[h3].__e == u3.__d && (u3.__d = k(i3, h3 + 1)), N(w2[h3], w2[h3]));
+  if (g3)
+    for (h3 = 0; h3 < g3.length; h3++)
+      M(g3[h3], g3[++h3], g3[++h3]);
+}
+function x(n4, l3, u3) {
+  for (var i3, t3 = n4.__k, o3 = 0; t3 && o3 < t3.length; o3++)
+    (i3 = t3[o3]) && (i3.__ = n4, l3 = typeof i3.type == "function" ? x(i3, l3, u3) : P(u3, i3, i3, t3, i3.__e, l3));
+  return l3;
+}
+function P(n4, l3, u3, i3, t3, o3) {
+  var r3, f3, e2;
+  if (l3.__d !== void 0)
+    r3 = l3.__d, l3.__d = void 0;
+  else if (u3 == null || t3 != o3 || t3.parentNode == null)
+    n:
+      if (o3 == null || o3.parentNode !== n4)
+        n4.appendChild(t3), r3 = null;
+      else {
+        for (f3 = o3, e2 = 0; (f3 = f3.nextSibling) && e2 < i3.length; e2 += 2)
+          if (f3 == t3)
+            break n;
+        n4.insertBefore(t3, o3), r3 = o3;
+      }
+  return r3 !== void 0 ? r3 : t3.nextSibling;
+}
+function C(n4, l3, u3, i3, t3) {
+  var o3;
+  for (o3 in u3)
+    o3 === "children" || o3 === "key" || o3 in l3 || H(n4, o3, null, u3[o3], i3);
+  for (o3 in l3)
+    t3 && typeof l3[o3] != "function" || o3 === "children" || o3 === "key" || o3 === "value" || o3 === "checked" || u3[o3] === l3[o3] || H(n4, o3, l3[o3], u3[o3], i3);
+}
+function $(n4, l3, u3) {
+  l3[0] === "-" ? n4.setProperty(l3, u3) : n4[l3] = u3 == null ? "" : typeof u3 != "number" || s.test(l3) ? u3 : u3 + "px";
+}
+function H(n4, l3, u3, i3, t3) {
+  var o3;
+  n:
+    if (l3 === "style")
+      if (typeof u3 == "string")
+        n4.style.cssText = u3;
+      else {
+        if (typeof i3 == "string" && (n4.style.cssText = i3 = ""), i3)
+          for (l3 in i3)
+            u3 && l3 in u3 || $(n4.style, l3, "");
+        if (u3)
+          for (l3 in u3)
+            i3 && u3[l3] === i3[l3] || $(n4.style, l3, u3[l3]);
+      }
+    else if (l3[0] === "o" && l3[1] === "n")
+      o3 = l3 !== (l3 = l3.replace(/Capture$/, "")), l3 = l3.toLowerCase() in n4 ? l3.toLowerCase().slice(2) : l3.slice(2), n4.l || (n4.l = {}), n4.l[l3 + o3] = u3, u3 ? i3 || n4.addEventListener(l3, o3 ? T : I, o3) : n4.removeEventListener(l3, o3 ? T : I, o3);
+    else if (l3 !== "dangerouslySetInnerHTML") {
+      if (t3)
+        l3 = l3.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
+      else if (l3 !== "href" && l3 !== "list" && l3 !== "form" && l3 !== "tabIndex" && l3 !== "download" && l3 in n4)
+        try {
+          n4[l3] = u3 == null ? "" : u3;
+          break n;
+        } catch (n5) {
+        }
+      typeof u3 == "function" || (u3 != null && (u3 !== false || l3[0] === "a" && l3[1] === "r") ? n4.setAttribute(l3, u3) : n4.removeAttribute(l3));
+    }
+}
+function I(n4) {
+  this.l[n4.type + false](l.event ? l.event(n4) : n4);
+}
+function T(n4) {
+  this.l[n4.type + true](l.event ? l.event(n4) : n4);
+}
+function j(n4, u3, i3, t3, o3, r3, f3, e2, c3) {
+  var s3, h3, v3, y2, p2, k2, b2, m3, g3, x3, A, P2 = u3.type;
+  if (u3.constructor !== void 0)
+    return null;
+  i3.__h != null && (c3 = i3.__h, e2 = u3.__e = i3.__e, u3.__h = null, r3 = [e2]), (s3 = l.__b) && s3(u3);
+  try {
+    n:
+      if (typeof P2 == "function") {
+        if (m3 = u3.props, g3 = (s3 = P2.contextType) && t3[s3.__c], x3 = s3 ? g3 ? g3.props.value : s3.__ : t3, i3.__c ? b2 = (h3 = u3.__c = i3.__c).__ = h3.__E : ("prototype" in P2 && P2.prototype.render ? u3.__c = h3 = new P2(m3, x3) : (u3.__c = h3 = new _(m3, x3), h3.constructor = P2, h3.render = O), g3 && g3.sub(h3), h3.props = m3, h3.state || (h3.state = {}), h3.context = x3, h3.__n = t3, v3 = h3.__d = true, h3.__h = []), h3.__s == null && (h3.__s = h3.state), P2.getDerivedStateFromProps != null && (h3.__s == h3.state && (h3.__s = a({}, h3.__s)), a(h3.__s, P2.getDerivedStateFromProps(m3, h3.__s))), y2 = h3.props, p2 = h3.state, v3)
+          P2.getDerivedStateFromProps == null && h3.componentWillMount != null && h3.componentWillMount(), h3.componentDidMount != null && h3.__h.push(h3.componentDidMount);
+        else {
+          if (P2.getDerivedStateFromProps == null && m3 !== y2 && h3.componentWillReceiveProps != null && h3.componentWillReceiveProps(m3, x3), !h3.__e && h3.shouldComponentUpdate != null && h3.shouldComponentUpdate(m3, h3.__s, x3) === false || u3.__v === i3.__v) {
+            h3.props = m3, h3.state = h3.__s, u3.__v !== i3.__v && (h3.__d = false), h3.__v = u3, u3.__e = i3.__e, u3.__k = i3.__k, u3.__k.forEach(function(n5) {
+              n5 && (n5.__ = u3);
+            }), h3.__h.length && f3.push(h3);
+            break n;
+          }
+          h3.componentWillUpdate != null && h3.componentWillUpdate(m3, h3.__s, x3), h3.componentDidUpdate != null && h3.__h.push(function() {
+            h3.componentDidUpdate(y2, p2, k2);
+          });
+        }
+        h3.context = x3, h3.props = m3, h3.state = h3.__s, (s3 = l.__r) && s3(u3), h3.__d = false, h3.__v = u3, h3.__P = n4, s3 = h3.render(h3.props, h3.state, h3.context), h3.state = h3.__s, h3.getChildContext != null && (t3 = a(a({}, t3), h3.getChildContext())), v3 || h3.getSnapshotBeforeUpdate == null || (k2 = h3.getSnapshotBeforeUpdate(y2, p2)), A = s3 != null && s3.type === d && s3.key == null ? s3.props.children : s3, w(n4, Array.isArray(A) ? A : [A], u3, i3, t3, o3, r3, f3, e2, c3), h3.base = u3.__e, u3.__h = null, h3.__h.length && f3.push(h3), b2 && (h3.__E = h3.__ = null), h3.__e = false;
+      } else
+        r3 == null && u3.__v === i3.__v ? (u3.__k = i3.__k, u3.__e = i3.__e) : u3.__e = L(i3.__e, u3, i3, t3, o3, r3, f3, c3);
+    (s3 = l.diffed) && s3(u3);
+  } catch (n5) {
+    u3.__v = null, (c3 || r3 != null) && (u3.__e = e2, u3.__h = !!c3, r3[r3.indexOf(e2)] = null), l.__e(n5, u3, i3);
+  }
+}
+function z(n4, u3) {
+  l.__c && l.__c(u3, n4), n4.some(function(u4) {
+    try {
+      n4 = u4.__h, u4.__h = [], n4.some(function(n5) {
+        n5.call(u4);
+      });
+    } catch (n5) {
+      l.__e(n5, u4.__v);
+    }
+  });
+}
+function L(l3, u3, i3, t3, o3, r3, f3, c3) {
+  var s3, a3, v3, y2 = i3.props, p2 = u3.props, d3 = u3.type, _3 = 0;
+  if (d3 === "svg" && (o3 = true), r3 != null) {
+    for (; _3 < r3.length; _3++)
+      if ((s3 = r3[_3]) && "setAttribute" in s3 == !!d3 && (d3 ? s3.localName === d3 : s3.nodeType === 3)) {
+        l3 = s3, r3[_3] = null;
+        break;
+      }
+  }
+  if (l3 == null) {
+    if (d3 === null)
+      return document.createTextNode(p2);
+    l3 = o3 ? document.createElementNS("http://www.w3.org/2000/svg", d3) : document.createElement(d3, p2.is && p2), r3 = null, c3 = false;
+  }
+  if (d3 === null)
+    y2 === p2 || c3 && l3.data === p2 || (l3.data = p2);
+  else {
+    if (r3 = r3 && n2.call(l3.childNodes), a3 = (y2 = i3.props || e).dangerouslySetInnerHTML, v3 = p2.dangerouslySetInnerHTML, !c3) {
+      if (r3 != null)
+        for (y2 = {}, _3 = 0; _3 < l3.attributes.length; _3++)
+          y2[l3.attributes[_3].name] = l3.attributes[_3].value;
+      (v3 || a3) && (v3 && (a3 && v3.__html == a3.__html || v3.__html === l3.innerHTML) || (l3.innerHTML = v3 && v3.__html || ""));
+    }
+    if (C(l3, p2, y2, o3, c3), v3)
+      u3.__k = [];
+    else if (_3 = u3.props.children, w(l3, Array.isArray(_3) ? _3 : [_3], u3, i3, t3, o3 && d3 !== "foreignObject", r3, f3, r3 ? r3[0] : i3.__k && k(i3, 0), c3), r3 != null)
+      for (_3 = r3.length; _3--; )
+        r3[_3] != null && h(r3[_3]);
+    c3 || ("value" in p2 && (_3 = p2.value) !== void 0 && (_3 !== l3.value || d3 === "progress" && !_3 || d3 === "option" && _3 !== y2.value) && H(l3, "value", _3, y2.value, false), "checked" in p2 && (_3 = p2.checked) !== void 0 && _3 !== l3.checked && H(l3, "checked", _3, y2.checked, false));
+  }
+  return l3;
+}
+function M(n4, u3, i3) {
+  try {
+    typeof n4 == "function" ? n4(u3) : n4.current = u3;
+  } catch (n5) {
+    l.__e(n5, i3);
+  }
+}
+function N(n4, u3, i3) {
+  var t3, o3;
+  if (l.unmount && l.unmount(n4), (t3 = n4.ref) && (t3.current && t3.current !== n4.__e || M(t3, null, u3)), (t3 = n4.__c) != null) {
+    if (t3.componentWillUnmount)
+      try {
+        t3.componentWillUnmount();
+      } catch (n5) {
+        l.__e(n5, u3);
+      }
+    t3.base = t3.__P = null;
+  }
+  if (t3 = n4.__k)
+    for (o3 = 0; o3 < t3.length; o3++)
+      t3[o3] && N(t3[o3], u3, typeof n4.type != "function");
+  i3 || n4.__e == null || h(n4.__e), n4.__e = n4.__d = void 0;
+}
+function O(n4, l3, u3) {
+  return this.constructor(n4, u3);
+}
+n2 = c.slice, l = { __e: function(n4, l3, u3, i3) {
+  for (var t3, o3, r3; l3 = l3.__; )
+    if ((t3 = l3.__c) && !t3.__)
+      try {
+        if ((o3 = t3.constructor) && o3.getDerivedStateFromError != null && (t3.setState(o3.getDerivedStateFromError(n4)), r3 = t3.__d), t3.componentDidCatch != null && (t3.componentDidCatch(n4, i3 || {}), r3 = t3.__d), r3)
+          return t3.__E = t3;
+      } catch (l4) {
+        n4 = l4;
+      }
+  throw n4;
+} }, u = 0, i = function(n4) {
+  return n4 != null && n4.constructor === void 0;
+}, _.prototype.setState = function(n4, l3) {
+  var u3;
+  u3 = this.__s != null && this.__s !== this.state ? this.__s : this.__s = a({}, this.state), typeof n4 == "function" && (n4 = n4(a({}, u3), this.props)), n4 && a(u3, n4), n4 != null && this.__v && (l3 && this.__h.push(l3), m(this));
+}, _.prototype.forceUpdate = function(n4) {
+  this.__v && (this.__e = true, n4 && this.__h.push(n4), m(this));
+}, _.prototype.render = d, t2 = [], o = typeof Promise == "function" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, g.__r = 0, f = 0;
+
+// node_modules/preact-render-to-string/dist/index.mjs
+var r2 = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|^--/i;
+var n3 = /[&<>"]/;
+function o2(e2) {
+  var t3 = String(e2);
+  return n3.test(t3) ? t3.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") : t3;
+}
+var a2 = function(e2, t3) {
+  return String(e2).replace(/(\n+)/g, "$1" + (t3 || "	"));
+};
+var i2 = function(e2, t3, r3) {
+  return String(e2).length > (t3 || 40) || !r3 && String(e2).indexOf("\n") !== -1 || String(e2).indexOf("<") !== -1;
+};
+var l2 = {};
+function s2(e2) {
+  var t3 = "";
+  for (var n4 in e2) {
+    var o3 = e2[n4];
+    o3 != null && o3 !== "" && (t3 && (t3 += " "), t3 += n4[0] == "-" ? n4 : l2[n4] || (l2[n4] = n4.replace(/([A-Z])/g, "-$1").toLowerCase()), t3 += ": ", t3 += o3, typeof o3 == "number" && r2.test(n4) === false && (t3 += "px"), t3 += ";");
+  }
+  return t3 || void 0;
+}
+function f2(e2, t3) {
+  for (var r3 in t3)
+    e2[r3] = t3[r3];
+  return e2;
+}
+function u2(e2, t3) {
+  return Array.isArray(t3) ? t3.reduce(u2, e2) : t3 != null && t3 !== false && e2.push(t3), e2;
+}
+var c2 = { shallow: true };
+var p = [];
+var _2 = /^(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)$/;
+var d2 = /[\s\n\\/='"\0<>]/;
+function v2() {
+  this.__d = true;
+}
+m2.render = m2;
+var g2 = function(e2, t3) {
+  return m2(e2, t3, c2);
+};
+var h2 = [];
+function m2(t3, r3, n4) {
+  r3 = r3 || {}, n4 = n4 || {};
+  var o3 = l.__s;
+  l.__s = true;
+  var a3 = x2(t3, r3, n4);
+  return l.__c && l.__c(t3, h2), h2.length = 0, l.__s = o3, a3;
+}
+function x2(r3, n4, l3, c3, g3, h3) {
+  if (r3 == null || typeof r3 == "boolean")
+    return "";
+  if (typeof r3 != "object")
+    return o2(r3);
+  var m3 = l3.pretty, y2 = m3 && typeof m3 == "string" ? m3 : "	";
+  if (Array.isArray(r3)) {
+    for (var b2 = "", S = 0; S < r3.length; S++)
+      m3 && S > 0 && (b2 += "\n"), b2 += x2(r3[S], n4, l3, c3, g3, h3);
+    return b2;
+  }
+  var w2, k2 = r3.type, O2 = r3.props, C2 = false;
+  if (typeof k2 == "function") {
+    if (C2 = true, !l3.shallow || !c3 && l3.renderRootComponent !== false) {
+      if (k2 === d) {
+        var A = [];
+        return u2(A, r3.props.children), x2(A, n4, l3, l3.shallowHighOrder !== false, g3, h3);
+      }
+      var H2, j2 = r3.__c = { __v: r3, context: n4, props: r3.props, setState: v2, forceUpdate: v2, __d: true, __h: [] };
+      l.__b && l.__b(r3);
+      var F = l.__r;
+      if (k2.prototype && typeof k2.prototype.render == "function") {
+        var M2 = k2.contextType, T2 = M2 && n4[M2.__c], $2 = M2 != null ? T2 ? T2.props.value : M2.__ : n4;
+        (j2 = r3.__c = new k2(O2, $2)).__v = r3, j2._dirty = j2.__d = true, j2.props = O2, j2.state == null && (j2.state = {}), j2._nextState == null && j2.__s == null && (j2._nextState = j2.__s = j2.state), j2.context = $2, k2.getDerivedStateFromProps ? j2.state = f2(f2({}, j2.state), k2.getDerivedStateFromProps(j2.props, j2.state)) : j2.componentWillMount && (j2.componentWillMount(), j2.state = j2._nextState !== j2.state ? j2._nextState : j2.__s !== j2.state ? j2.__s : j2.state), F && F(r3), H2 = j2.render(j2.props, j2.state, j2.context);
+      } else
+        for (var L2 = k2.contextType, E = L2 && n4[L2.__c], D = L2 != null ? E ? E.props.value : L2.__ : n4, N2 = 0; j2.__d && N2++ < 25; )
+          j2.__d = false, F && F(r3), H2 = k2.call(r3.__c, O2, D);
+      return j2.getChildContext && (n4 = f2(f2({}, n4), j2.getChildContext())), l.diffed && l.diffed(r3), x2(H2, n4, l3, l3.shallowHighOrder !== false, g3, h3);
+    }
+    k2 = (w2 = k2).displayName || w2 !== Function && w2.name || function(e2) {
+      var t3 = (Function.prototype.toString.call(e2).match(/^\s*function\s+([^( ]+)/) || "")[1];
+      if (!t3) {
+        for (var r4 = -1, n5 = p.length; n5--; )
+          if (p[n5] === e2) {
+            r4 = n5;
+            break;
+          }
+        r4 < 0 && (r4 = p.push(e2) - 1), t3 = "UnnamedComponent" + r4;
+      }
+      return t3;
+    }(w2);
+  }
+  var P2, R, U = "<" + k2;
+  if (O2) {
+    var W = Object.keys(O2);
+    l3 && l3.sortAttributes === true && W.sort();
+    for (var q = 0; q < W.length; q++) {
+      var z2 = W[q], I2 = O2[z2];
+      if (z2 !== "children") {
+        if (!d2.test(z2) && (l3 && l3.allAttributes || z2 !== "key" && z2 !== "ref" && z2 !== "__self" && z2 !== "__source")) {
+          if (z2 === "defaultValue")
+            z2 = "value";
+          else if (z2 === "className") {
+            if (O2.class !== void 0)
+              continue;
+            z2 = "class";
+          } else
+            g3 && z2.match(/^xlink:?./) && (z2 = z2.toLowerCase().replace(/^xlink:?/, "xlink:"));
+          if (z2 === "htmlFor") {
+            if (O2.for)
+              continue;
+            z2 = "for";
+          }
+          z2 === "style" && I2 && typeof I2 == "object" && (I2 = s2(I2)), z2[0] === "a" && z2[1] === "r" && typeof I2 == "boolean" && (I2 = String(I2));
+          var V = l3.attributeHook && l3.attributeHook(z2, I2, n4, l3, C2);
+          if (V || V === "")
+            U += V;
+          else if (z2 === "dangerouslySetInnerHTML")
+            R = I2 && I2.__html;
+          else if (k2 === "textarea" && z2 === "value")
+            P2 = I2;
+          else if ((I2 || I2 === 0 || I2 === "") && typeof I2 != "function") {
+            if (!(I2 !== true && I2 !== "" || (I2 = z2, l3 && l3.xml))) {
+              U += " " + z2;
+              continue;
+            }
+            if (z2 === "value") {
+              if (k2 === "select") {
+                h3 = I2;
+                continue;
+              }
+              k2 === "option" && h3 == I2 && O2.selected === void 0 && (U += " selected");
+            }
+            U += " " + z2 + '="' + o2(I2) + '"';
+          }
+        }
+      } else
+        P2 = I2;
+    }
+  }
+  if (m3) {
+    var Z = U.replace(/\n\s*/, " ");
+    Z === U || ~Z.indexOf("\n") ? m3 && ~U.indexOf("\n") && (U += "\n") : U = Z;
+  }
+  if (U += ">", d2.test(k2))
+    throw new Error(k2 + " is not a valid HTML tag name in " + U);
+  var B, G = _2.test(k2) || l3.voidElements && l3.voidElements.test(k2), J = [];
+  if (R)
+    m3 && i2(R) && (R = "\n" + y2 + a2(R, y2)), U += R;
+  else if (P2 != null && u2(B = [], P2).length) {
+    for (var K = m3 && ~U.indexOf("\n"), Q = false, X = 0; X < B.length; X++) {
+      var Y = B[X];
+      if (Y != null && Y !== false) {
+        var ee = x2(Y, n4, l3, true, k2 === "svg" || k2 !== "foreignObject" && g3, h3);
+        if (m3 && !K && i2(ee) && (K = true), ee)
+          if (m3) {
+            var te = ee.length > 0 && ee[0] != "<";
+            Q && te ? J[J.length - 1] += ee : J.push(ee), Q = te;
+          } else
+            J.push(ee);
+      }
+    }
+    if (m3 && K)
+      for (var re = J.length; re--; )
+        J[re] = "\n" + y2 + a2(J[re], y2);
+  }
+  if (J.length || R)
+    U += J.join("");
+  else if (l3 && l3.xml)
+    return U.substring(0, U.length - 1) + " />";
+  return !G || B || R ? (m3 && ~U.indexOf("\n") && (U += "\n"), U += "</" + k2 + ">") : U = U.replace(/>$/, " />"), U;
+}
+m2.shallowRender = g2;
+
+// src/lib/constants.js
+var SECURITY_HEADERS = {
+  "strict-transport-security": "max-age=63072000; includeSubdomains; preload",
+  "content-security-policy": "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "DENY",
+  "x-xss-protection": "1; mode=block"
+};
+var TEXT_HTML = "text/html";
+var APPLICATION_JSON = "application/json";
+
+// src/components/Header.js
+var Header = () => {
+  return html_default`
     <div class="site-header bg-blue-500">
       <nav class="flex pl-8 py-4 gap-4">
         <a href="/">Home</a> <a href="/posts">Posts</a>
       </nav>
     </div>
-  `;var T=({children:t})=>b` <main class="my-8">${t}</main> `;var $=()=>b` <footer>The footer</footer> `;function me(){return b`
+  `;
+};
+
+// src/components/Main.js
+var Main = ({ children }) => {
+  return html_default` <main class="my-8">${children}</main> `;
+};
+
+// src/components/Footer.js
+var Footer = () => {
+  return html_default` <footer>The footer</footer> `;
+};
+
+// src/pages/404.js
+function PageNotFound() {
+  return html_default`
     <div class="wrapper">
-      <${S} />
+      <${Header} />
       <div>
         <h1>Page not found</h1>
       </div>
-      <${$} />
+      <${Footer} />
     </div>
-  `}var K=({head:t,content:e})=>`<!DOCTYPE html>
+  `;
+}
+
+// src/pages/_document.js
+var HtmlPage = ({ head: head3, content }) => {
+  return `<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8" />
@@ -31,54 +727,240 @@ var Gt=Object.create;var _e=Object.defineProperty;var Jt=Object.getOwnPropertyDe
         <title>Bill Beckelman</title>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="stylesheet" href="/site.css" />
-        ${t||""}
+        ${head3 || ""}
       </head>
       <body>
-        ${e}
+        ${content}
       </body>
     </html>
-  `;var b=it.bind(vt),ve=t=>typeof t=="function";function Ut({request:t,env:e}){return async(r,n,i)=>{let o={},a={"content-type":"text/html",...Ht},u="";if(ve(n.api)&&(o=await n.api({request:t,env:e,params:i}),o.errorCode)){let s=U(me());return new Response(K({content:s}),{status:o.errorCode,headers:a})}ve(n.headers)&&(a={...a,...n.headers({request:t,env:e,props:o})}),ve(n.head)&&(u=U(n.head({request:t,env:e,props:o})));let p=U(n.default({request:t,env:e,props:o})),d=r({content:p,head:u});return new Response(d,{headers:a})}}function ye(){return new Response(`User-agent: *
-Disallow: /`,{headers:{"content-type":"text/plain"}})}var ge={};G(ge,{default:()=>Ft,head:()=>Pr,headers:()=>$r});function $r(){return{"x-whatever":"12345"}}function Pr(){return b` <meta name="author" content="Bill Beckelman" /> `}function Ft(){return b`
+  `;
+};
+
+// src/lib/html.js
+var html_default = htm_module_default.bind(v);
+var isFunction = (fn) => {
+  return typeof fn === "function";
+};
+function createRenderer({ request, env }) {
+  return async (Layout, Page, params) => {
+    let data = {};
+    let headers3 = {
+      ...SECURITY_HEADERS
+    };
+    const wantsJson = request.headers.has("accept") && request.headers.get("accept").split(",").find((x3) => x3 === APPLICATION_JSON);
+    if (wantsJson) {
+      headers3["content-type"] = APPLICATION_JSON;
+      if (isFunction(Page.api)) {
+        data = await Page.api({ request, env, params });
+        if (data.errorCode) {
+          return new Response(JSON.stringify({}), {
+            status: data.errorCode,
+            headers: headers3
+          });
+        }
+        return new Response(JSON.stringify(data), { headers: headers3 });
+      }
+      {
+        return new Response(JSON.stringify({}), { status: 404, headers: headers3 });
+      }
+    }
+    let head3 = "";
+    headers3["content-type"] = TEXT_HTML;
+    if (isFunction(Page.api)) {
+      data = await Page.api({ request, env, params });
+      if (data.errorCode) {
+        const html2 = m2(PageNotFound());
+        return new Response(HtmlPage({ content: html2 }), {
+          status: data.errorCode,
+          headers: headers3
+        });
+      }
+    }
+    if (isFunction(Page.headers)) {
+      headers3 = { ...headers3, ...Page.headers({ request, env, props: data }) };
+    }
+    if (isFunction(Page.head)) {
+      head3 = m2(Page.head({ request, env, props: data }));
+    }
+    const content = m2(Page.default({ request, env, props: data }));
+    const html = Layout({ content, head: head3 });
+    return new Response(html, { headers: headers3 });
+  };
+}
+
+// src/pages/robots.js
+function Robots() {
+  return new Response(`User-agent: *
+Disallow: /`, {
+    headers: { "content-type": "text/plain" }
+  });
+}
+
+// src/pages/about.js
+var about_exports = {};
+__export(about_exports, {
+  default: () => About,
+  head: () => head,
+  headers: () => headers
+});
+function headers() {
+  return {
+    "x-whatever": "12345"
+  };
+}
+function head() {
+  return html_default` <meta name="author" content="Bill Beckelman" /> `;
+}
+function About() {
+  return html_default`
     <div class="wrapper">
-      <${S} />
-      <${T}>
+      <${Header} />
+      <${Main}>
         <h1>About</h1>
       <//>
-      <${$} />
+      <${Footer} />
     </div>
-  `}var xe={};G(xe,{api:()=>Tr,default:()=>Dt,head:()=>Er,headers:()=>Rr});var Ot=({posts:t})=>b`<ul class="list-disc list-inside">
-    ${t.map(e=>b`<li>
-        <a href="/post/${e.id}">${e.title}</a>
+  `;
+}
+
+// src/pages/index.js
+var pages_exports = {};
+__export(pages_exports, {
+  api: () => api,
+  default: () => Index,
+  head: () => head2,
+  headers: () => headers2
+});
+
+// src/components/PostList.js
+var PostList = ({ posts }) => {
+  return html_default`<ul class="list-disc list-inside">
+    ${posts.map((i3) => html_default`<li>
+        <a href="/post/${i3.id}">${i3.title}</a>
       </li>`)}
-  </ul>`;function Rr(){return{"x-whatever":"12345"}}function Er(){return b` <meta name="author" content="Bill Beckelman" /> `}async function Tr(){return{posts:(await(await fetch("https://jsonplaceholder.typicode.com/posts")).json()).slice(0,10)}}function Dt({props:t}){let{posts:e}=t;return b`
+  </ul>`;
+};
+
+// src/pages/index.js
+function headers2() {
+  return {
+    "x-whatever": "12345"
+  };
+}
+function head2() {
+  return html_default` <meta name="author" content="Bill Beckelman" /> `;
+}
+async function api() {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+  const data = await res.json();
+  return { posts: data.slice(0, 10) };
+}
+function Index({ props }) {
+  const { posts } = props;
+  return html_default`
     <div class="wrapper">
-      <${S} />
-      <${T}>
+      <${Header} />
+      <${Main}>
         <h1>Latest Posts</h1>
-        <${Ot} posts=${e} />
+        <${PostList} posts=${posts} />
       <//>
-      <${$} />
+      <${Footer} />
     </div>
-  `}var be={};G(be,{api:()=>Ar,default:()=>Mt});async function Ar({env:t}){await t.SITE.put("test.json",JSON.stringify({test:"1"}));let e=await t.SITE.get("test.json","json");return{posts:await(await fetch("https://jsonplaceholder.typicode.com/posts")).json(),site:e}}function Mt({props:t}){let{posts:e}=t;return b`
+  `;
+}
+
+// src/pages/posts.js
+var posts_exports = {};
+__export(posts_exports, {
+  api: () => api2,
+  default: () => Posts
+});
+async function api2({ env }) {
+  await env.SITE.put("test.json", JSON.stringify({ test: "1" }));
+  const site = await env.SITE.get("test.json", "json");
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+  const data = await res.json();
+  return { posts: data, site };
+}
+function Posts({ props }) {
+  const { posts } = props;
+  return html_default`
     <div class="wrapper">
-      <${S} />
-      <${T}>
+      <${Header} />
+      <${Main}>
         <h1>Posts</h1>
         <ul class="list-disc list-inside">
-          ${e.map(r=>b`<li>
-              <a href="/post/${r.id}">${r.title}</a>
+          ${posts.map((i3) => html_default`<li>
+              <a href="/post/${i3.id}">${i3.title}</a>
             </li>`)}
         </ul>
       <//>
-      <${$} />
+      <${Footer} />
     </div>
-  `}var ke={};G(ke,{api:()=>Hr,default:()=>Nt});async function Hr({params:t}){let{id:e}=t,r=await fetch(`https://jsonplaceholder.typicode.com/posts/${e}`);return r.ok?{post:await r.json()}:{errorCode:r.status}}function Nt({props:t}){let{post:e}=t;return b`
+  `;
+}
+
+// src/pages/post/[id].js
+var id_exports = {};
+__export(id_exports, {
+  api: () => api3,
+  default: () => Post
+});
+async function api3({ params }) {
+  const { id } = params;
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  if (!res.ok) {
+    return { errorCode: res.status };
+  }
+  const data = await res.json();
+  return { post: data };
+}
+function Post({ props }) {
+  const { post } = props;
+  const result = html_default`
     <div class="wrapper">
-      <${S} />
-      <${T}>
-        <h1>${e.title}</h1>
-        <div>${e.body}</div>
+      <${Header} />
+      <${Main}>
+        <h1>${post.title}</h1>
+        <div>${post.body}</div>
       <//>
-      <${$} />
+      <${Footer} />
     </div>
-  `}var qt=[{path:"/about",code:ge},{path:"/",code:xe},{path:"/posts",code:be},{path:"/post/:id",code:ke}];function we(t){let{request:e,env:r}=t,n=Ut(t),i=(0,X.ThrowableRouter)();for(let o of qt)i.get(o.path,X.withParams,({params:a})=>n(K,o.code,a));return i.all("/robots.txt",ye).get("*",()=>r.ASSETS.fetch(e)),i}var Bo={async fetch(t,e){return we({request:t,env:e}).handle(t)}};export{Bo as default};
+  `;
+  return result;
+}
+
+// src/lib/routes.js
+var routes = [
+  { path: "/about", code: about_exports },
+  { path: "/", code: pages_exports },
+  { path: "/posts", code: posts_exports },
+  { path: "/post/:id", code: id_exports }
+];
+
+// src/lib/router.js
+function Router(context) {
+  const { request, env } = context;
+  const render = createRenderer(context);
+  const router = (0, import_itty_router_extras.ThrowableRouter)();
+  for (const route of routes) {
+    router.get(route.path, import_itty_router_extras.withParams, ({ params }) => {
+      return render(HtmlPage, route.code, params);
+    });
+  }
+  router.all("/robots.txt", Robots).get("*", () => {
+    return env.ASSETS.fetch(request);
+  });
+  return router;
+}
+
+// src/index.js
+var src_default = {
+  async fetch(request, env) {
+    const router = Router({ request, env });
+    return router.handle(request);
+  }
+};
+export {
+  src_default as default
+};

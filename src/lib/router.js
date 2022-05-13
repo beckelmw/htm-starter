@@ -12,9 +12,9 @@ export default function Router(context) {
   const router = ThrowableRouter();
 
   for (const route of routes) {
-    router.get(route.path, withParams, ({ params }) =>
-      render(HtmlPage, route.code, params)
-    );
+    router.get(route.path, withParams, ({ params }) => {
+      return render(HtmlPage, route.code, params);
+    });
   }
 
   router.all("/robots.txt", robots).get("*", () => {
