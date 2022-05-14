@@ -1,4 +1,5 @@
 var __create = Object.create;
+var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -20,6 +21,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 
 // node_modules/itty-router-extras/middleware/withContent.js
 var require_withContent = __commonJS({
@@ -650,7 +652,7 @@ m2.shallowRender = g2;
 // src/lib/constants.js
 var SECURITY_HEADERS = {
   "strict-transport-security": "max-age=63072000; includeSubdomains; preload",
-  "content-security-policy": "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'",
+  "content-security-policy": "default-src 'none'; connect-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'",
   "x-content-type-options": "nosniff",
   "x-frame-options": "DENY",
   "x-xss-protection": "1; mode=block"
@@ -691,7 +693,9 @@ var Header = () => {
   return html_default`
     <div class="site-header bg-blue-500">
       <nav class="flex pl-8 py-4 gap-4">
-        <a href="/">Home</a> <a href="/posts">Posts</a>
+        <a href="/">Home</a> 
+        <a href="/posts">Posts</a>
+        <a href="/htmx">Htmx</a>
       </nav>
     </div>
   `;
@@ -721,7 +725,7 @@ function PageNotFound() {
 }
 
 // src/pages/_document.js
-var HtmlPage = ({ head: head3, content }) => {
+var HtmlPage = ({ head: head4, content }) => {
   return `<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -730,7 +734,7 @@ var HtmlPage = ({ head: head3, content }) => {
         <title>Bill Beckelman</title>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="stylesheet" href="/site.css" />
-        ${head3 || ""}
+        ${head4 || ""}
       </head>
       <body>
         ${content}
@@ -746,47 +750,47 @@ var isFunction = (fn) => {
 function createRenderer({ request, env }) {
   return async (Layout, Page, params) => {
     let data = {};
-    let headers3 = {
+    let headers4 = {
       ...SECURITY_HEADERS
     };
     const wantsJson = request.headers.has("accept") && request.headers.get("accept").split(",").find((x3) => x3 === APPLICATION_JSON);
     if (wantsJson) {
-      headers3["content-type"] = APPLICATION_JSON;
+      headers4["content-type"] = APPLICATION_JSON;
       if (isFunction(Page.api)) {
         data = await Page.api({ request, env, params });
         if (data.errorCode) {
           return new Response(JSON.stringify({}), {
             status: data.errorCode,
-            headers: headers3
+            headers: headers4
           });
         }
-        return new Response(JSON.stringify(data), { headers: headers3 });
+        return new Response(JSON.stringify(data), { headers: headers4 });
       }
       {
-        return new Response(JSON.stringify({}), { status: 404, headers: headers3 });
+        return new Response(JSON.stringify({}), { status: 404, headers: headers4 });
       }
     }
-    let head3 = "";
-    headers3["content-type"] = TEXT_HTML;
+    let head4 = "";
+    headers4["content-type"] = TEXT_HTML;
     if (isFunction(Page.api)) {
       data = await Page.api({ request, env, params });
       if (data.errorCode) {
         const html2 = m2(PageNotFound());
         return new Response(HtmlPage({ content: html2 }), {
           status: data.errorCode,
-          headers: headers3
+          headers: headers4
         });
       }
     }
     if (isFunction(Page.headers)) {
-      headers3 = { ...headers3, ...Page.headers({ request, env, props: data }) };
+      headers4 = { ...headers4, ...Page.headers({ request, env, props: data }) };
     }
     if (isFunction(Page.head)) {
-      head3 = m2(Page.head({ request, env, props: data }));
+      head4 = m2(Page.head({ request, env, props: data }));
     }
     const content = m2(Page.default({ request, env, props: data }));
-    const html = Layout({ content, head: head3 });
-    return new Response(html, { headers: headers3 });
+    const html = Layout({ content, head: head4 });
+    return new Response(html, { headers: headers4 });
   };
 }
 
@@ -825,13 +829,59 @@ function About() {
   `;
 }
 
+// src/pages/htmx.js
+var htmx_exports = {};
+__export(htmx_exports, {
+  default: () => Htmx,
+  head: () => head2,
+  headers: () => headers2
+});
+function headers2() {
+  return {
+    "x-whatever": "12345"
+  };
+}
+var _a;
+function head2() {
+  return html_default(_a || (_a = __template([' <script src="/js/htmx.min.js" defer><\/script> '])));
+}
+function Htmx() {
+  return html_default`
+    <div class="wrapper">
+      <${Header} />
+      <${Main}>
+        <h1>Htmx</h1>
+
+        <div class="mb-8">
+          <a href="https://htmx.org/">https://htmx.org/</a>
+        </div>
+
+        <div class="mb-8">
+          <button
+            class="px-4 py-2 text-white bg-blue-500 rounded"
+            hx-post="/htmx/clicked"
+            hx-trigger="click"
+            hx-target="#parent-div"
+            hx-swap="innerHTML"
+          >
+            Click Me!
+          </button>
+        </div>
+
+        <div id="parent-div"></div>
+      <//>
+      <${Footer} />
+    </div>
+  `;
+}
+
 // src/pages/index.js
 var pages_exports = {};
 __export(pages_exports, {
   api: () => api,
   default: () => Index,
-  head: () => head2,
-  headers: () => headers2
+  head: () => head3,
+  headers: () => headers3
 });
 
 // src/components/PostList.js
@@ -844,12 +894,12 @@ var PostList = ({ posts }) => {
 };
 
 // src/pages/index.js
-function headers2() {
+function headers3() {
   return {
     "x-whatever": "12345"
   };
 }
-function head2() {
+function head3() {
   return html_default` <meta name="author" content="Bill Beckelman" /> `;
 }
 async function api() {
@@ -935,6 +985,7 @@ function Post({ props }) {
 // src/lib/routes.js
 var routes = [
   { path: "/about", code: about_exports },
+  { path: "/htmx", code: htmx_exports },
   { path: "/", code: pages_exports },
   { path: "/posts", code: posts_exports },
   { path: "/post/:id", code: id_exports }
@@ -950,7 +1001,10 @@ function Router(context) {
       return render(HtmlPage, route.code, params);
     });
   }
-  router.all("/robots.txt", Robots).get("*", () => {
+  router.post("/htmx/clicked", () => {
+    const html = `<div>Hello world!</div>`;
+    return new Response(html, { headers: { "content-type": "text/html" } });
+  }).all("/robots.txt", Robots).get("*", () => {
     return env.ASSETS.fetch(request);
   });
   return router;

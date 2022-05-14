@@ -17,11 +17,17 @@ export default function Router(context) {
     });
   }
 
-  router.all("/robots.txt", robots).get("*", () => {
-    // Since we are using cloudflare pages need to go here
-    // in order to get assets like css
-    return env.ASSETS.fetch(request);
-  });
+  router
+    .post("/htmx/clicked", () => {
+      const html = `<div>Hello world!</div>`;
+      return new Response(html, { headers: { "content-type": "text/html" } });
+    })
+    .all("/robots.txt", robots)
+    .get("*", () => {
+      // Since we are using cloudflare pages need to go here
+      // in order to get assets like css
+      return env.ASSETS.fetch(request);
+    });
 
   return router;
 }
