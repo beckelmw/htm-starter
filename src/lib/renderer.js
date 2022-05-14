@@ -1,7 +1,11 @@
-import { render as renderToString } from "preact-render-to-string";
+import { render } from "./html.js";
 import { SECURITY_HEADERS, APPLICATION_JSON, TEXT_HTML } from "./constants.js";
 import * as PageNotFound from "#pages/404.js";
 import { HtmlPage } from "#pages/_document.js";
+import { Header } from "#components/Header.js";
+import { Main } from "#components/Main.js";
+import { Footer } from "#components/Footer.js";
+import html from "./html";
 
 const isFunction = (fn) => {
   return typeof fn === "function";
@@ -46,8 +50,8 @@ export function createRenderer({ request, env }) {
     if (isFunction(Page.api)) {
       data = await Page.api({ request, env, params });
       if (data.errorCode) {
-        const html = renderToString(PageNotFound.default());
-        return new Response(HtmlPage({ content: html }), {
+        const content = render(PageNotFound.default());
+        return new Response(HtmlPage({ content }), {
           status: data.errorCode,
           headers,
         });
@@ -59,11 +63,15 @@ export function createRenderer({ request, env }) {
     }
 
     if (isFunction(Page.head)) {
-      head = renderToString(Page.head({ request, env, props: data }));
+      head = render(Page.head({ request, env, props: data }));
     }
 
-    const content = renderToString(Page.default({ request, env, props: data }));
-    const html = Layout({ content, head });
-    return new Response(html, { headers });
+    const header = render(html`<${Header} />`);
+    const main = render(
+      html`<${Main}>${Page.default({ request, env, props: data })}<//>`
+    );
+    const footer = render(html`<${Footer} />`);
+    const content = Layout({ content: `${header}\n${main}\n${footer}`, head });
+    return new Response(content, { headers });
   };
 }

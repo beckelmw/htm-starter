@@ -1,5 +1,4 @@
 import html from "#lib/html.js";
-import { Header, Footer, Main } from "#components/index.js";
 
 export async function api({ env }) {
   await env.SITE.put("test.json", JSON.stringify({ test: "1" }));
@@ -13,19 +12,13 @@ export default function Posts({ props }) {
   const { posts } = props;
 
   return html`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>Posts</h1>
-        <ul class="list-disc list-inside">
-          ${posts.map(
-            (i) => html`<li>
-              <a href="/post/${i.id}">${i.title}</a>
-            </li>`
-          )}
-        </ul>
-      <//>
-      <${Footer} />
-    </div>
+    <h1>Posts</h1>
+    <ul class="list-disc list-inside">
+      ${posts.map(
+        (i) => html`<li>
+          <a href="/post/${i.id}">${i.title}</a>
+        </li>`
+      )}
+    </ul>
   `;
 }

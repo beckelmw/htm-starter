@@ -1,5 +1,4 @@
 import html from "#lib/html.js";
-import { Header, Footer, Main } from "#components/index.js";
 
 export function headers() {
   return {
@@ -12,13 +11,5 @@ export function head() {
 }
 
 export default function About() {
-  return html`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>About</h1>
-      <//>
-      <${Footer} />
-    </div>
-  `;
+  return html` <h1>About</h1> `;
 }

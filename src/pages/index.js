@@ -1,5 +1,4 @@
 import html from "#lib/html.js";
-import { Header, Footer, Main } from "#components/index.js";
 import { PostList } from "#components/PostList.js";
 
 export function headers() {
@@ -19,15 +18,9 @@ export async function api() {
 }
 export default function Index({ props }) {
   const { posts } = props;
-  
+
   return html`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>Latest Posts</h1>
-        <${PostList} posts=${posts} />
-      <//>
-      <${Footer} />
-    </div>
+    <h1>Latest Posts</h1>
+    <${PostList} posts=${posts} />
   `;
 }

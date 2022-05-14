@@ -201,12 +201,37 @@ var require_itty_router_extras = __commonJS({
 // src/lib/router.js
 var import_itty_router_extras = __toESM(require_itty_router_extras(), 1);
 
+// node_modules/htm/dist/htm.module.js
+var n = function(t3, s3, r3, e2) {
+  var u3;
+  s3[0] = 0;
+  for (var h3 = 1; h3 < s3.length; h3++) {
+    var p2 = s3[h3++], a3 = s3[h3] ? (s3[0] |= p2 ? 1 : 2, r3[s3[h3++]]) : s3[++h3];
+    p2 === 3 ? e2[0] = a3 : p2 === 4 ? e2[1] = Object.assign(e2[1] || {}, a3) : p2 === 5 ? (e2[1] = e2[1] || {})[s3[++h3]] = a3 : p2 === 6 ? e2[1][s3[++h3]] += a3 + "" : p2 ? (u3 = t3.apply(a3, n(t3, a3, r3, ["", null])), e2.push(u3), a3[0] ? s3[0] |= 2 : (s3[h3 - 2] = 0, s3[h3] = u3)) : e2.push(a3);
+  }
+  return e2;
+};
+var t = /* @__PURE__ */ new Map();
+function htm_module_default(s3) {
+  var r3 = t.get(this);
+  return r3 || (r3 = /* @__PURE__ */ new Map(), t.set(this, r3)), (r3 = n(this, r3.get(s3) || (r3.set(s3, r3 = function(n4) {
+    for (var t3, s4, r4 = 1, e2 = "", u3 = "", h3 = [0], p2 = function(n5) {
+      r4 === 1 && (n5 || (e2 = e2.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h3.push(0, n5, e2) : r4 === 3 && (n5 || e2) ? (h3.push(3, n5, e2), r4 = 2) : r4 === 2 && e2 === "..." && n5 ? h3.push(4, n5, 0) : r4 === 2 && e2 && !n5 ? h3.push(5, 0, true, e2) : r4 >= 5 && ((e2 || !n5 && r4 === 5) && (h3.push(r4, 0, e2, s4), r4 = 6), n5 && (h3.push(r4, n5, 0, s4), r4 = 6)), e2 = "";
+    }, a3 = 0; a3 < n4.length; a3++) {
+      a3 && (r4 === 1 && p2(), p2(a3));
+      for (var l3 = 0; l3 < n4[a3].length; l3++)
+        t3 = n4[a3][l3], r4 === 1 ? t3 === "<" ? (p2(), h3 = [h3], r4 = 3) : e2 += t3 : r4 === 4 ? e2 === "--" && t3 === ">" ? (r4 = 1, e2 = "") : e2 = t3 + e2[0] : u3 ? t3 === u3 ? u3 = "" : e2 += t3 : t3 === '"' || t3 === "'" ? u3 = t3 : t3 === ">" ? (p2(), r4 = 1) : r4 && (t3 === "=" ? (r4 = 5, s4 = e2, e2 = "") : t3 === "/" && (r4 < 5 || n4[a3][l3 + 1] === ">") ? (p2(), r4 === 3 && (h3 = h3[0]), r4 = h3, (h3 = h3[0]).push(2, 0, r4), r4 = 0) : t3 === " " || t3 === "	" || t3 === "\n" || t3 === "\r" ? (p2(), r4 = 2) : e2 += t3), r4 === 3 && e2 === "!--" && (r4 = 4, h3 = h3[0]);
+    }
+    return p2(), h3;
+  }(s3)), r3), arguments, [])).length > 1 ? r3 : r3[0];
+}
+
 // node_modules/preact/dist/preact.module.js
-var n;
+var n2;
 var l;
 var u;
 var i;
-var t;
+var t2;
 var o;
 var r;
 var f;
@@ -226,7 +251,7 @@ function v(l3, u3, i3) {
   var t3, o3, r3, f3 = {};
   for (r3 in u3)
     r3 == "key" ? t3 = u3[r3] : r3 == "ref" ? o3 = u3[r3] : f3[r3] = u3[r3];
-  if (arguments.length > 2 && (f3.children = arguments.length > 3 ? n.call(arguments, 2) : i3), typeof l3 == "function" && l3.defaultProps != null)
+  if (arguments.length > 2 && (f3.children = arguments.length > 3 ? n2.call(arguments, 2) : i3), typeof l3 == "function" && l3.defaultProps != null)
     for (r3 in l3.defaultProps)
       f3[r3] === void 0 && (f3[r3] = l3.defaultProps[r3]);
   return y(l3, f3, t3, o3, null);
@@ -261,13 +286,13 @@ function b(n4) {
   }
 }
 function m(n4) {
-  (!n4.__d && (n4.__d = true) && t.push(n4) && !g.__r++ || r !== l.debounceRendering) && ((r = l.debounceRendering) || o)(g);
+  (!n4.__d && (n4.__d = true) && t2.push(n4) && !g.__r++ || r !== l.debounceRendering) && ((r = l.debounceRendering) || o)(g);
 }
 function g() {
-  for (var n4; g.__r = t.length; )
-    n4 = t.sort(function(n5, l3) {
+  for (var n4; g.__r = t2.length; )
+    n4 = t2.sort(function(n5, l3) {
       return n5.__v.__b - l3.__v.__b;
-    }), t = [], n4.some(function(n5) {
+    }), t2 = [], n4.some(function(n5) {
       var l3, u3, i3, t3, o3, r3;
       n5.__d && (o3 = (t3 = (l3 = n5).__v).__e, (r3 = l3.__P) && (u3 = [], (i3 = a({}, t3)).__v = t3.__v + 1, j(r3, t3, i3, l3.__n, r3.ownerSVGElement !== void 0, t3.__h != null ? [o3] : null, u3, o3 == null ? k(t3) : o3, t3.__h), z(u3, t3), t3.__e != o3 && b(t3)));
     });
@@ -416,7 +441,7 @@ function L(l3, u3, i3, t3, o3, r3, f3, c3) {
   if (d3 === null)
     y2 === p2 || c3 && l3.data === p2 || (l3.data = p2);
   else {
-    if (r3 = r3 && n.call(l3.childNodes), a3 = (y2 = i3.props || e).dangerouslySetInnerHTML, v3 = p2.dangerouslySetInnerHTML, !c3) {
+    if (r3 = r3 && n2.call(l3.childNodes), a3 = (y2 = i3.props || e).dangerouslySetInnerHTML, v3 = p2.dangerouslySetInnerHTML, !c3) {
       if (r3 != null)
         for (y2 = {}, _3 = 0; _3 < l3.attributes.length; _3++)
           y2[l3.attributes[_3].name] = l3.attributes[_3].value;
@@ -457,7 +482,7 @@ function N(n4, u3, i3) {
 function O(n4, l3, u3) {
   return this.constructor(n4, u3);
 }
-n = c.slice, l = { __e: function(n4, l3, u3, i3) {
+n2 = c.slice, l = { __e: function(n4, l3, u3, i3) {
   for (var t3, o3, r3; l3 = l3.__; )
     if ((t3 = l3.__c) && !t3.__)
       try {
@@ -474,14 +499,14 @@ n = c.slice, l = { __e: function(n4, l3, u3, i3) {
   u3 = this.__s != null && this.__s !== this.state ? this.__s : this.__s = a({}, this.state), typeof n4 == "function" && (n4 = n4(a({}, u3), this.props)), n4 && a(u3, n4), n4 != null && this.__v && (l3 && this.__h.push(l3), m(this));
 }, _.prototype.forceUpdate = function(n4) {
   this.__v && (this.__e = true, n4 && this.__h.push(n4), m(this));
-}, _.prototype.render = d, t = [], o = typeof Promise == "function" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, g.__r = 0, f = 0;
+}, _.prototype.render = d, t2 = [], o = typeof Promise == "function" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, g.__r = 0, f = 0;
 
 // node_modules/preact-render-to-string/dist/index.mjs
 var r2 = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|^--/i;
-var n2 = /[&<>"]/;
+var n3 = /[&<>"]/;
 function o2(e2) {
   var t3 = String(e2);
-  return n2.test(t3) ? t3.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") : t3;
+  return n3.test(t3) ? t3.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") : t3;
 }
 var a2 = function(e2, t3) {
   return String(e2).replace(/(\n+)/g, "$1" + (t3 || "	"));
@@ -649,6 +674,12 @@ function x2(r3, n4, l3, c3, g3, h3) {
 }
 m2.shallowRender = g2;
 
+// src/lib/html.js
+var html_default = htm_module_default.bind(v);
+function render(node) {
+  return m2(node);
+}
+
 // src/lib/constants.js
 var SECURITY_HEADERS = {
   "strict-transport-security": "max-age=63072000; includeSubdomains; preload",
@@ -660,68 +691,9 @@ var SECURITY_HEADERS = {
 var TEXT_HTML = "text/html";
 var APPLICATION_JSON = "application/json";
 
-// node_modules/htm/dist/htm.module.js
-var n3 = function(t3, s3, r3, e2) {
-  var u3;
-  s3[0] = 0;
-  for (var h3 = 1; h3 < s3.length; h3++) {
-    var p2 = s3[h3++], a3 = s3[h3] ? (s3[0] |= p2 ? 1 : 2, r3[s3[h3++]]) : s3[++h3];
-    p2 === 3 ? e2[0] = a3 : p2 === 4 ? e2[1] = Object.assign(e2[1] || {}, a3) : p2 === 5 ? (e2[1] = e2[1] || {})[s3[++h3]] = a3 : p2 === 6 ? e2[1][s3[++h3]] += a3 + "" : p2 ? (u3 = t3.apply(a3, n3(t3, a3, r3, ["", null])), e2.push(u3), a3[0] ? s3[0] |= 2 : (s3[h3 - 2] = 0, s3[h3] = u3)) : e2.push(a3);
-  }
-  return e2;
-};
-var t2 = /* @__PURE__ */ new Map();
-function htm_module_default(s3) {
-  var r3 = t2.get(this);
-  return r3 || (r3 = /* @__PURE__ */ new Map(), t2.set(this, r3)), (r3 = n3(this, r3.get(s3) || (r3.set(s3, r3 = function(n4) {
-    for (var t3, s4, r4 = 1, e2 = "", u3 = "", h3 = [0], p2 = function(n5) {
-      r4 === 1 && (n5 || (e2 = e2.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h3.push(0, n5, e2) : r4 === 3 && (n5 || e2) ? (h3.push(3, n5, e2), r4 = 2) : r4 === 2 && e2 === "..." && n5 ? h3.push(4, n5, 0) : r4 === 2 && e2 && !n5 ? h3.push(5, 0, true, e2) : r4 >= 5 && ((e2 || !n5 && r4 === 5) && (h3.push(r4, 0, e2, s4), r4 = 6), n5 && (h3.push(r4, n5, 0, s4), r4 = 6)), e2 = "";
-    }, a3 = 0; a3 < n4.length; a3++) {
-      a3 && (r4 === 1 && p2(), p2(a3));
-      for (var l3 = 0; l3 < n4[a3].length; l3++)
-        t3 = n4[a3][l3], r4 === 1 ? t3 === "<" ? (p2(), h3 = [h3], r4 = 3) : e2 += t3 : r4 === 4 ? e2 === "--" && t3 === ">" ? (r4 = 1, e2 = "") : e2 = t3 + e2[0] : u3 ? t3 === u3 ? u3 = "" : e2 += t3 : t3 === '"' || t3 === "'" ? u3 = t3 : t3 === ">" ? (p2(), r4 = 1) : r4 && (t3 === "=" ? (r4 = 5, s4 = e2, e2 = "") : t3 === "/" && (r4 < 5 || n4[a3][l3 + 1] === ">") ? (p2(), r4 === 3 && (h3 = h3[0]), r4 = h3, (h3 = h3[0]).push(2, 0, r4), r4 = 0) : t3 === " " || t3 === "	" || t3 === "\n" || t3 === "\r" ? (p2(), r4 = 2) : e2 += t3), r4 === 3 && e2 === "!--" && (r4 = 4, h3 = h3[0]);
-    }
-    return p2(), h3;
-  }(s3)), r3), arguments, [])).length > 1 ? r3 : r3[0];
-}
-
-// src/lib/html.js
-var html_default = htm_module_default.bind(v);
-
-// src/components/Header.js
-var Header = () => {
-  return html_default`
-    <div class="site-header bg-blue-500">
-      <nav class="flex pl-8 py-4 gap-4">
-        <a href="/">Home</a> 
-        <a href="/posts">Posts</a>
-        <a href="/htmx">Htmx</a>
-      </nav>
-    </div>
-  `;
-};
-
-// src/components/Main.js
-var Main = ({ children }) => {
-  return html_default` <main class="my-8">${children}</main> `;
-};
-
-// src/components/Footer.js
-var Footer = () => {
-  return html_default` <footer>The footer</footer> `;
-};
-
 // src/pages/404.js
 function PageNotFound() {
-  return html_default`
-    <div class="wrapper">
-      <${Header} />
-      <div>
-        <h1>Page not found</h1>
-      </div>
-      <${Footer} />
-    </div>
-  `;
+  return html_default` <h1>Page not found</h1> `;
 }
 
 // src/pages/_document.js
@@ -741,6 +713,31 @@ var HtmlPage = ({ head: head4, content }) => {
       </body>
     </html>
   `;
+};
+
+// src/components/Header.js
+var Header = () => {
+  return html_default`
+    <div class="site-header bg-blue-500">
+      <nav class="flex pl-8 py-4 gap-4">
+        <a href="/">Home</a> 
+        <a href="/posts">Posts</a>
+        <a href="/htmx">Htmx</a>
+      </nav>
+    </div>
+  `;
+};
+
+// src/components/Main.js
+var Main = ({ children }) => {
+  return html_default`<div class="wrapper">
+    <main class="my-8">${children}</main>
+  </div> `;
+};
+
+// src/components/Footer.js
+var Footer = () => {
+  return html_default` <footer class="pl-8 py-4 bg-gray-900 text-white">The footer</footer> `;
 };
 
 // src/lib/renderer.js
@@ -775,8 +772,8 @@ function createRenderer({ request, env }) {
     if (isFunction(Page.api)) {
       data = await Page.api({ request, env, params });
       if (data.errorCode) {
-        const html2 = m2(PageNotFound());
-        return new Response(HtmlPage({ content: html2 }), {
+        const content2 = render(PageNotFound());
+        return new Response(HtmlPage({ content: content2 }), {
           status: data.errorCode,
           headers: headers4
         });
@@ -786,11 +783,15 @@ function createRenderer({ request, env }) {
       headers4 = { ...headers4, ...Page.headers({ request, env, props: data }) };
     }
     if (isFunction(Page.head)) {
-      head4 = m2(Page.head({ request, env, props: data }));
+      head4 = render(Page.head({ request, env, props: data }));
     }
-    const content = m2(Page.default({ request, env, props: data }));
-    const html = Layout({ content, head: head4 });
-    return new Response(html, { headers: headers4 });
+    const header = render(html_default`<${Header} />`);
+    const main = render(html_default`<${Main}>${Page.default({ request, env, props: data })}<//>`);
+    const footer = render(html_default`<${Footer} />`);
+    const content = Layout({ content: `${header}
+${main}
+${footer}`, head: head4 });
+    return new Response(content, { headers: headers4 });
   };
 }
 
@@ -802,10 +803,11 @@ Disallow: /`, {
   });
 }
 
-// src/pages/about.js
-var about_exports = {};
-__export(about_exports, {
-  default: () => About,
+// src/pages/htmx.js
+var htmx_exports = {};
+__export(htmx_exports, {
+  actions: () => actions,
+  default: () => Htmx,
   head: () => head,
   headers: () => headers
 });
@@ -814,25 +816,67 @@ function headers() {
     "x-whatever": "12345"
   };
 }
+var _a;
 function head() {
-  return html_default` <meta name="author" content="Bill Beckelman" /> `;
+  return html_default(_a || (_a = __template([' <script src="/js/htmx.min.js" defer><\/script> '])));
 }
-function About() {
-  return html_default`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>About</h1>
-      <//>
-      <${Footer} />
+var Content = () => {
+  const date = new Date();
+  return html_default`<div id="htmx">
+    <h1>Htmx</h1>
+    <div class="mb-8">Rendered at ${date.toLocaleTimeString()}</div>
+    <div class="mb-8">
+      <a href="https://htmx.org/">https://htmx.org/</a>
     </div>
-  `;
-}
 
-// src/pages/htmx.js
-var htmx_exports = {};
-__export(htmx_exports, {
-  default: () => Htmx,
+    <div class="mb-8">
+      <button
+        class="px-4 py-2 text-white bg-blue-500 rounded"
+        hx-post="/htmx/clicked"
+        hx-trigger="click"
+        hx-target="#parent-div"
+        hx-swap="innerHTML"
+      >
+        Click Me!
+      </button>
+    </div>
+
+    <div id="parent-div"></div>
+
+    <div class="mb-8">
+      <button
+        class="px-4 py-2 text-white bg-green-500 rounded"
+        hx-get="/htmx/refresh"
+        hx-trigger="click"
+        hx-target="#htmx"
+        hx-swap="outerHTML"
+      >
+        Server refresh
+      </button>
+    </div>
+  </div>`;
+};
+function Htmx() {
+  return html_default` <${Content} /> `;
+}
+function send(content) {
+  return new Response(content, { headers: { "content-type": "text/html" } });
+}
+var actions = {
+  clicked: () => {
+    const result = render(html_default`<div>Hello world!</div>`);
+    return send(result);
+  },
+  refresh: () => {
+    const result = render(html_default`<${Content} />`);
+    return send(result);
+  }
+};
+
+// src/pages/about.js
+var about_exports = {};
+__export(about_exports, {
+  default: () => About,
   head: () => head2,
   headers: () => headers2
 });
@@ -841,38 +885,11 @@ function headers2() {
     "x-whatever": "12345"
   };
 }
-var _a;
 function head2() {
-  return html_default(_a || (_a = __template([' <script src="/js/htmx.min.js" defer><\/script> '])));
+  return html_default` <meta name="author" content="Bill Beckelman" /> `;
 }
-function Htmx() {
-  return html_default`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>Htmx</h1>
-
-        <div class="mb-8">
-          <a href="https://htmx.org/">https://htmx.org/</a>
-        </div>
-
-        <div class="mb-8">
-          <button
-            class="px-4 py-2 text-white bg-blue-500 rounded"
-            hx-post="/htmx/clicked"
-            hx-trigger="click"
-            hx-target="#parent-div"
-            hx-swap="innerHTML"
-          >
-            Click Me!
-          </button>
-        </div>
-
-        <div id="parent-div"></div>
-      <//>
-      <${Footer} />
-    </div>
-  `;
+function About() {
+  return html_default` <h1>About</h1> `;
 }
 
 // src/pages/index.js
@@ -910,14 +927,8 @@ async function api() {
 function Index({ props }) {
   const { posts } = props;
   return html_default`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>Latest Posts</h1>
-        <${PostList} posts=${posts} />
-      <//>
-      <${Footer} />
-    </div>
+    <h1>Latest Posts</h1>
+    <${PostList} posts=${posts} />
   `;
 }
 
@@ -937,18 +948,12 @@ async function api2({ env }) {
 function Posts({ props }) {
   const { posts } = props;
   return html_default`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>Posts</h1>
-        <ul class="list-disc list-inside">
-          ${posts.map((i3) => html_default`<li>
-              <a href="/post/${i3.id}">${i3.title}</a>
-            </li>`)}
-        </ul>
-      <//>
-      <${Footer} />
-    </div>
+    <h1>Posts</h1>
+    <ul class="list-disc list-inside">
+      ${posts.map((i3) => html_default`<li>
+          <a href="/post/${i3.id}">${i3.title}</a>
+        </li>`)}
+    </ul>
   `;
 }
 
@@ -970,41 +975,37 @@ async function api3({ params }) {
 function Post({ props }) {
   const { post } = props;
   const result = html_default`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>${post.title}</h1>
-        <div>${post.body}</div>
-      <//>
-      <${Footer} />
-    </div>
+    <h1>${post.title}</h1>
+    <div>${post.body}</div>
   `;
   return result;
 }
 
 // src/lib/routes.js
 var routes = [
-  { path: "/about", code: about_exports },
-  { path: "/htmx", code: htmx_exports },
-  { path: "/", code: pages_exports },
-  { path: "/posts", code: posts_exports },
-  { path: "/post/:id", code: id_exports }
+  { path: "/about", code: about_exports, hasActions: false },
+  { path: "/htmx", code: htmx_exports, hasActions: true },
+  { path: "/", code: pages_exports, hasActions: false },
+  { path: "/posts", code: posts_exports, hasActions: false },
+  { path: "/post/:id", code: id_exports, hasActions: false }
 ];
 
 // src/lib/router.js
 function Router(context) {
   const { request, env } = context;
-  const render = createRenderer(context);
+  const render2 = createRenderer(context);
   const router = (0, import_itty_router_extras.ThrowableRouter)();
   for (const route of routes) {
     router.get(route.path, import_itty_router_extras.withParams, ({ params }) => {
-      return render(HtmlPage, route.code, params);
+      return render2(HtmlPage, route.code, params);
     });
+    if (route.hasActions) {
+      router.all(`${route.path}/:action`, import_itty_router_extras.withParams, ({ params }) => {
+        return route.code.actions[params.action]();
+      });
+    }
   }
-  router.post("/htmx/clicked", () => {
-    const html = `<div>Hello world!</div>`;
-    return new Response(html, { headers: { "content-type": "text/html" } });
-  }).all("/robots.txt", Robots).get("*", () => {
+  router.all("/robots.txt", Robots).get("*", () => {
     return env.ASSETS.fetch(request);
   });
   return router;

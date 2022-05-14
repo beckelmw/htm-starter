@@ -3,6 +3,8 @@ import { createRenderer } from "#lib/renderer.js";
 import { HtmlPage } from "#pages/_document.js";
 import robots from "#pages/robots.js";
 
+import { actions } from "#pages/htmx";
+
 import { routes } from "./routes.js";
 
 export default function Router(context) {
@@ -15,13 +17,15 @@ export default function Router(context) {
     router.get(route.path, withParams, ({ params }) => {
       return render(HtmlPage, route.code, params);
     });
+
+    if (route.hasActions) {
+      router.all(`${route.path}/:action`, withParams, ({ params }) => {
+        return route.code.actions[params.action]();
+      });
+    }
   }
 
   router
-    .post("/htmx/clicked", () => {
-      const html = `<div>Hello world!</div>`;
-      return new Response(html, { headers: { "content-type": "text/html" } });
-    })
     .all("/robots.txt", robots)
     .get("*", () => {
       // Since we are using cloudflare pages need to go here

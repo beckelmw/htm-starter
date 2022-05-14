@@ -1,5 +1,4 @@
 import html from "#lib/html.js";
-import { Header, Footer, Main } from "#components/index.js";
 
 export async function api({ params }) {
   const { id } = params;
@@ -15,14 +14,8 @@ export default function Post({ props }) {
   const { post } = props;
 
   const result = html`
-    <div class="wrapper">
-      <${Header} />
-      <${Main}>
-        <h1>${post.title}</h1>
-        <div>${post.body}</div>
-      <//>
-      <${Footer} />
-    </div>
+    <h1>${post.title}</h1>
+    <div>${post.body}</div>
   `;
   return result;
 }

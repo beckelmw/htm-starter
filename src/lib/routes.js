@@ -1,14 +1,14 @@
 // GENERATED FILE
-import * as About_647cbd77624b63437837f46bc68f8460 from '../pages/about.js';
-import * as Htmx_d16603ced73a3fc946c05e9f2524ad1e from '../pages/htmx.js';
-import * as Index_c3cd08fe4e84b6fbd37246210d7f1c24 from '../pages/index.js';
-import * as Posts_69ada9942aca325385fe9f8338581183 from '../pages/posts.js';
-import * as Post_a926657231ffad56f023a9cfdbb66d98 from '../pages/post/[id].js';
+import * as About_189faf3e184ff6eb196d8c120fad731e from '../pages/about.js';
+import * as Htmx_ab2ddeb1b1a42d3cbdc5c86ee98e9dd6 from '../pages/htmx.js';
+import * as Index_1f1d2f8f35dda5ed618ea05014ebd23c from '../pages/index.js';
+import * as Posts_5ff555d63f971eb3ce5ef069ef14c7da from '../pages/posts.js';
+import * as Post_e4395473a2f31b83d0d650c42b8475ec from '../pages/post/[id].js';
 
   export const routes = [
-    {path: '/about', code: About_647cbd77624b63437837f46bc68f8460},
-{path: '/htmx', code: Htmx_d16603ced73a3fc946c05e9f2524ad1e},
-{path: '/', code: Index_c3cd08fe4e84b6fbd37246210d7f1c24},
-{path: '/posts', code: Posts_69ada9942aca325385fe9f8338581183},
-{path: '/post/:id', code: Post_a926657231ffad56f023a9cfdbb66d98}
+    {path: '/about', code: About_189faf3e184ff6eb196d8c120fad731e, hasActions: false},
+{path: '/htmx', code: Htmx_ab2ddeb1b1a42d3cbdc5c86ee98e9dd6, hasActions: true},
+{path: '/', code: Index_1f1d2f8f35dda5ed618ea05014ebd23c, hasActions: false},
+{path: '/posts', code: Posts_5ff555d63f971eb3ce5ef069ef14c7da, hasActions: false},
+{path: '/post/:id', code: Post_e4395473a2f31b83d0d650c42b8475ec, hasActions: false}
   ];

@@ -19,7 +19,8 @@ for (const file of files) {
   );
   const hash = await hasha.async(contents, { algorithm: "md5" });
   const name = `${code.default.name}_${hash}`;
-  ROUTES[file] = { name, file };
+  const hasActions = !!code.actions;
+  ROUTES[file] = { name, file, hasActions };
 }
 
 const routes = Object.keys(ROUTES).map((route) => {
@@ -28,9 +29,9 @@ const routes = Object.keys(ROUTES).map((route) => {
     .replace(/\[\.{3}.+\]/, "*")
     .replace(/\[(.+)\]/, ":$1");
 
-  const { file, name } = ROUTES[route];
+  const { file, name, hasActions } = ROUTES[route];
 
-  return { path, file: file.replace("../src", ".."), name };
+  return { path, file: file.replace("../src", ".."), name, hasActions };
 });
 
 const fileContent = `// GENERATED FILE
@@ -43,7 +44,7 @@ ${routes
   export const routes = [
     ${routes
       .map((r) => {
-        return `{path: '${r.path}', code: ${r.name}}`;
+        return `{path: '${r.path}', code: ${r.name}, hasActions: ${r.hasActions}}`;
       })
       .join(",\n")}
   ];
