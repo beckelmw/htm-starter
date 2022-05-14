@@ -58,6 +58,7 @@ export function createRenderer({ request, env }) {
       }
     }
 
+    // TODO Rework everything below here to stream as a response
     if (isFunction(Page.headers)) {
       headers = { ...headers, ...Page.headers({ request, env, props: data }) };
     }
@@ -68,7 +69,7 @@ export function createRenderer({ request, env }) {
 
     const header = render(html`<${Header} />`);
     const main = render(
-      html`<${Main}>${Page.default({ request, env, props: data })}<//>`
+      html`<${Main}>${Page.default({ request, env, params, props: data })}<//>`
     );
     const footer = render(html`<${Footer} />`);
     const content = Layout({ content: `${header}\n${main}\n${footer}`, head });
