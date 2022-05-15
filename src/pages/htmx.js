@@ -1,4 +1,5 @@
 import html, { render } from "#lib/html.js";
+import Quote from "#components/Quote.js";
 
 export function headers() {
   return {
@@ -13,13 +14,12 @@ export function head() {
 const Content = () => {
   const date = new Date();
   return html`<div id="htmx">
-    <h1>Htmx</h1>
-    <blockquote class="mb-8">
+    <h1>${"</>"} htmx</h1>
+    <${Quote} link="https://htmx.org/">
       htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent
       Events directly in HTML, using attributes, so you can build modern user
-      interfaces with the simplicity and power of hypertext –
-      <a href="https://htmx.org/">https://htmx.org/</a>
-    </blockquote>
+      interfaces with the simplicity and power of hypertext
+    <//>
     <div class="mb-8">Rendered at ${date.toLocaleTimeString()}</div>
 
     <div class="mb-8 pb-8 border-b-2 border-b-blue-500">

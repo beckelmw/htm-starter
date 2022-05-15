@@ -811,6 +811,22 @@ __export(htmx_exports, {
   head: () => head,
   headers: () => headers
 });
+
+// src/components/Quote.js
+var Quote_default = ({ children, link }) => {
+  return html_default`
+    <figure class="p-4 border-l-4 mb-4 border-l-green-500 bg-gray-200">
+      <blockquote class="before:content-['“'] after:content-['”']">
+        ${children}
+      </blockquote>
+      <figcaption class="text-right">
+        – <cite><a href="${link}">${link}</a></cite>
+      </figcaption>
+    </figure>
+  `;
+};
+
+// src/pages/htmx.js
 function headers() {
   return {
     "x-whatever": "12345"
@@ -823,13 +839,12 @@ function head() {
 var Content = () => {
   const date = new Date();
   return html_default`<div id="htmx">
-    <h1>Htmx</h1>
-    <blockquote class="mb-8">
+    <h1>${"</>"} htmx</h1>
+    <${Quote_default} link="https://htmx.org/">
       htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent
       Events directly in HTML, using attributes, so you can build modern user
-      interfaces with the simplicity and power of hypertext –
-      <a href="https://htmx.org/">https://htmx.org/</a>
-    </blockquote>
+      interfaces with the simplicity and power of hypertext
+    <//>
     <div class="mb-8">Rendered at ${date.toLocaleTimeString()}</div>
 
     <div class="mb-8 pb-8 border-b-2 border-b-blue-500">
